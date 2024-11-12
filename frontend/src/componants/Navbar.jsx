@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
 import {assets} from '../assets/assets_frontend/assets.js'
 import { NavLink,useNavigate } from 'react-router-dom'
+import Logo from './Logo.jsx';
+import Navcom from './Navcom.jsx';
 
 const Navbar = () => {
     //use navigate hook
@@ -13,34 +15,19 @@ const Navbar = () => {
 
   return (
     <div className='flex items-center justify-around py-4 mb-5 border-b border-b-gray-400'>
-      <NavLink to='/'>
-        <img src={assets.logo} alt=""  className='w-44 cursor-pointer'/>
-      </NavLink>
+      
+        <Logo/>
+    
       
       <ul className='hidden md:flex items-start gap-10 font-medium'>
-        <NavLink to='/'> 
-            <li className='py-1'>Home</li>
-            <hr className='border-none outline-none h-0.5 bg-primary w-3/5 m-auto hidden'/>
-        </NavLink>
-        <NavLink to='/doctors'>
-            <li className='py-1'>All Doctors</li>
-            <hr className='border-none outline-none h-0.5 bg-primary w-3/5 m-auto hidden'/>
-        </NavLink>
-        <NavLink to='/About'>
-            <li className='py-1'>About</li>
-            <hr className='border-none outline-none h-0.5 bg-primary w-3/5 m-auto hidden'/>
-        </NavLink>
-        <NavLink to='/contact'>
-            <li className='py-1'>Contact</li>
-            <hr className='border-none outline-none h-0.5 bg-primary w-3/5 m-auto hidden'/>
-        </NavLink>
+        <Navcom/>
       </ul>
       <div className='flex items-center gap-4'>
         {
             token
             ? <div className='flex items-center gap-6 cursor-pointer group relative'>
-                <img className='w-10 rounded-full' src={assets.profile_pic} alt="" srcset="" />
-                <img className='w-3' src={assets.dropdown_icon} alt="" srcset="" />
+                <img className='w-10 rounded-full' src={assets.profile_pic} alt="" srcSet="" />
+                <img className='w-3' src={assets.dropdown_icon} alt="" srcSet="" />
                 <div className='absolute top-0 right-0 pt-20 text-base font-medium text-gray-600 z-20 hidden group-hover:block'>
                     <div className='min-w-48 bg-stone-50 rounded flex-col gap-5 p-4'>
                         <p onClick={()=>navigate('./Myprofile')} className='hover:text-black cursor-pointer'>My Profile</p>

@@ -14,7 +14,7 @@ const Banner = () => {
          <button onClick={()=>navigate('./login')} className='flex items-center gap-2 bg-white px-10 py-4  rounded-full text-gray-600 text-sm  m-auto md:m-0 hover:scale-105 transition-all duration-300'>Create Account</button>
       </div>
       <div className='md:w-1/2 relative'>
-          <img  src={assets.appointment_img} alt="" srcset="" />
+          <img  src={assets.appointment_img} alt="" srcSet="" />
       </div>
     </div>
   )
