@@ -23,7 +23,7 @@ const Footer = () => {
       {/* Company Links */}
       <div className="space-y-2">
       <h2 className="font-semibold text-lg text-black ">COMPANY</h2>
-      <Navcom style="flex-col gap-1 font-light text-gray" /> {/* Pass 'flex-col' as style here */}
+      <Navcom style="flex-col gap-1 font-light text-gray" /> 
     </div>
       
       {/* Contact Information */}
