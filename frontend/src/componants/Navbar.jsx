@@ -20,7 +20,7 @@ const Navbar = () => {
     
       
       <ul className='hidden md:flex items-start gap-10 font-medium'>
-        <Navcom/>
+        <Navcom style={"gap-10"}/>
       </ul>
       <div className='flex items-center gap-4'>
         {
