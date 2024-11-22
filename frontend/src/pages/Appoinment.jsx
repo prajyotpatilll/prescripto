@@ -2,9 +2,12 @@ import React, { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { AppContext } from "../context/AppContext";
 import { assets } from "../assets/assets_frontend/assets";
+import Relateddoc from "../componants/Relateddoc";
+import Topdoctors from "../componants/Topdoctors";
+
 
 const Appointment = () => {
-  const { docid } = useParams();
+  const { docid,speciality } = useParams();
   const { doctors, currencysem } = useContext(AppContext);
 
   const daysofweek = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"];
@@ -71,7 +74,7 @@ const Appointment = () => {
   }, [docinfo]);
 
   useEffect(() => {
-    console.log(docslot);
+    
   }, [docslot]);
 
   return (
@@ -150,6 +153,10 @@ const Appointment = () => {
       <div className="flex items-center justify-center p-5">
         <p className='flex items-center gap-2 bg-primary px-8 py-3 rounded-full  text-white text-sm  m-auto md:m-0 hover:scale-105 transition-all duration-300'>Book an appointment</p>
       </div>
+
+      <Topdoctors/>
+
+      {/* <Relateddoc docid={docid} speciality={speciality} /> */}
     </div>
   );
 };
