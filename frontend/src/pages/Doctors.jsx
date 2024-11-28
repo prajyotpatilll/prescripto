@@ -60,12 +60,7 @@ const Doctors = () => {
           >
             Neurologist
           </p>
-          <p
-            onClick={() => handleSpecialtyClick('Gynecologist')}
-            className="border border-gray-300 p-2 rounded hover:bg-gray-100 cursor-pointer transition"
-          >
-            Gastroenterologist
-          </p>
+          
         </div>
       </div>
 
