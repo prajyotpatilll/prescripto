@@ -3,6 +3,7 @@ import bcrypt from "bcrypt"
 import {v2 as cloudinary} from "cloudinary"
 import { json } from "express"
 import doctorModel from "../models/doctormodel.js"
+import jwt from "jsonwebtoken"
 
 
 
@@ -57,4 +58,27 @@ const adddoctor = async (req, res)=>{
 }
 
 
-export {adddoctor}      
+//login admin controle
+
+const loginAdmin = async (req,res)=>{
+    try {
+        const {email, password} = req.body
+        
+        if(email === process.env.ADMIN_EMAIL  &&  password === process.env.ADMIN_PASSWORD){
+            
+             const token = jwt.sign(email + password , process.env.JWT_SECREATE_TOKEN)
+
+             res.json({success:true, token})
+
+        }else{
+            res.json({success:false, message:"envalid login attempt"})
+        }
+
+    } catch (error) {
+        console.log(error)
+        res.json({success:false, message:error.message})
+    }
+
+}
+
+export {adddoctor,loginAdmin}      
