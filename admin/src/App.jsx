@@ -16,22 +16,17 @@ const App = () => {
 
   return atoken ? (
     <div className="flex flex-col min-h-screen bg-gray-50">
-      {/* Toast Notifications */}
       <ToastContainer />
 
-      {/* Header */}
       <header className="bg-white shadow-md">
         <Navbar />
       </header>
 
-      {/* Content Area */}
       <div className="flex flex-grow">
-        {/* Sidebar */}
         <aside className="w-64 bg-gray-800 text-white hidden md:block">
           <Sidebar />
         </aside>
 
-        {/* Main Content */}
         <main className="flex-grow p-6 bg-gray-100">
           <Routes>
             <Route path="/" element={<></>} />
