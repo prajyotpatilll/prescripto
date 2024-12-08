@@ -10,10 +10,13 @@ import Myappointment from './pages/Myappointment'
 import Myprofile from './pages/Myprofile'
 import Navbar from './componants/Navbar'
 import Footer from './componants/Footer'
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const App = () => {
   return (
     <div className='mx-5 xl:mx-[11rem] sm-mx:[10%]'>
+      <ToastContainer/>
      <Navbar/>
       <Routes>
         <Route path='/' element={<Home/>}/>
