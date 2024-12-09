@@ -3,14 +3,23 @@ import { assets } from "../assets/assets_frontend/assets.js";
 import { NavLink, useNavigate } from "react-router-dom";
 import Logo from "./Logo.jsx";
 import Navcom from "./Navcom.jsx";
+import { useContext } from "react";
+import { AppContext } from "../context/AppContext.jsx";
 
 const Navbar = () => {
   //use navigate hook
   const navigate = useNavigate();
 
+  const {token, settoken} = useContext(AppContext)
+
   //dropdown and login button
   const [showmenu, setshowmenu] = useState(false);
-  const [token, settoken] = useState(true);
+
+  const logout= ()=>{
+    settoken(false)
+    localStorage.removeItem('token')
+  }
+  
 
   return (
     <div className="flex items-center justify-around py-4 mb-5 border-b border-b-gray-400">
@@ -44,7 +53,7 @@ const Navbar = () => {
                   My appointment
                 </p>
                 <p
-                  onClick={() => settoken(false)}
+                  onClick={logout}
                   className="hover:text-black cursor-pointer"
                 >
                   Logout

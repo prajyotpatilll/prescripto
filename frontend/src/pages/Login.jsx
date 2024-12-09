@@ -1,14 +1,60 @@
 import React, { useState } from "react";
+import { useContext } from "react";
+import { AppContext } from "../context/AppContext";
+import axios from "axios";
+import { toast } from "react-toastify";
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
+  const { token, settoken, backendURL } = useContext(AppContext);
+
   const [state, setState] = useState("sign up");
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+  const navigate = useNavigate()
+
   const onSubmithandler = async (event) => {
     event.preventDefault();
+
+    try {
+      if (state === "sign up") {
+        const { data } = await axios.post(backendURL + "/api/user/register", {
+          name,
+          password,
+          email,
+        });
+        if (data.success) {
+          localStorage.setItem("token", data.token);
+          settoken(data.token);
+        } else {
+          toast.error(data.message);
+        }
+      } else {
+        const { data } = await axios.post(backendURL + "/api/user/login", {
+          password,
+          email,
+        });
+        if (data.success) {
+          localStorage.setItem("token", data.token);
+          settoken(data.token);
+        } else {
+          toast.error(data.message);
+        }
+      }
+    } catch (error) {
+      toast.error(error.message);
+    }
   };
+
+  useEffect(()=>{
+    if(token){
+       navigate('/')
+    }
+    
+  },[token])
 
   return (
     <form
@@ -64,7 +110,10 @@ const Login = () => {
             placeholder="Enter your password"
           />
         </div>
-        <button className="w-full bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600 transition">
+        <button
+          type="submit"
+          className="w-full bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600 transition"
+        >
           {state === "sign up" ? "Sign Up" : "Log In"}
         </button>
         <div className="text-sm text-gray-600 mt-4">

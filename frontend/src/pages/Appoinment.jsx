@@ -4,6 +4,7 @@ import { AppContext } from "../context/AppContext";
 import { assets } from "../assets/assets_frontend/assets";
 import Relateddoc from "../componants/Relateddoc";
 import Topdoctors from "../componants/Topdoctors";
+import Speciallitymenu from "../componants/Speciallitymenu";
 
 
 const Appointment = () => {
@@ -84,7 +85,7 @@ const Appointment = () => {
           <div className="justify-center items-center flex flex-col md:flex-row gap-5">
             <div className="w-1/3">
               <img
-                className="bg-blue-400 rounded-xl"
+                className="bg-blue-200 rounded-xl"
                 src={docinfo.image}
                 alt="Doctor"
               />
@@ -98,7 +99,7 @@ const Appointment = () => {
                 <p>{docinfo.degree}</p>
                 <p className="pr-2"> - {docinfo.speciality} </p>
                 <p className="px-2 border border-gray-300 rounded-full">
-                  {docinfo.experience}
+                  {docinfo.exprience}
                 </p>
               </div>
 
@@ -155,6 +156,7 @@ const Appointment = () => {
       </div>
 
       <Topdoctors/>
+   
 
       {/* <Relateddoc docid={docid} speciality={speciality} /> */}
     </div>
