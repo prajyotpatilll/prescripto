@@ -29,7 +29,7 @@ const Navbar = () => {
         <Navcom style={"gap-10"} />
       </ul>
       <div className="flex items-center gap-4">
-        {token ? (
+        {token && userdata ? (
           <div className="flex items-center gap-6 cursor-pointer group relative">
             <img
               className="w-10 rounded-full"
