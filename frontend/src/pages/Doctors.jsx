@@ -24,43 +24,41 @@ const Doctors = () => {
     navigate(`/doctors/${specialty}`);
   };
 
-
   return (
     <div className="flex justify-between ">
       <div className="w-1/4 mr-10">
         <h2 className="text-xl py-4 ">Browse through the doctors specialist</h2>
         <div className="space-y-3">
-        <p
-            onClick={() => handleSpecialtyClick('General physician')}
+          <p
+            onClick={() => handleSpecialtyClick("General physician")}
             className="border border-gray-300 p-2 rounded hover:bg-gray-100 cursor-pointer transition"
           >
             General Physician
           </p>
           <p
-            onClick={() => handleSpecialtyClick('Gynecologist')}
+            onClick={() => handleSpecialtyClick("Gynecologist")}
             className="border border-gray-300 p-2 rounded hover:bg-gray-100 cursor-pointer transition"
           >
             Gynecologist
           </p>
           <p
-            onClick={() => handleSpecialtyClick('Dermatologist')}
+            onClick={() => handleSpecialtyClick("Dermatologist")}
             className="border border-gray-300 p-2 rounded hover:bg-gray-100 cursor-pointer transition"
           >
             Dermatologist
           </p>
           <p
-            onClick={() => handleSpecialtyClick('Pediatricians')}
+            onClick={() => handleSpecialtyClick("Pediatricians")}
             className="border border-gray-300 p-2 rounded hover:bg-gray-100 cursor-pointer transition"
           >
             Pediatrician
           </p>
           <p
-            onClick={() => handleSpecialtyClick('Neurologist')}
+            onClick={() => handleSpecialtyClick("Neurologist")}
             className="border border-gray-300 p-2 rounded hover:bg-gray-100 cursor-pointer transition"
           >
             Neurologist
           </p>
-          
         </div>
       </div>
 
@@ -75,8 +73,17 @@ const Doctors = () => {
             <img className="bg-blue-50" src={item.image} alt="" />
             <div className="p-4">
               <div className="flex items-center gap-2 text-sm text-center text-green-500">
-                <p className="w-2 h-2 bg-green-500 rounded-full"></p>
-                <p>Available</p>
+                {item.available ? (
+                  <div className="flex items-center gap-2 text-sm text-center">
+                    <p className="w-2 h-2 bg-green-500 rounded-full"></p>
+                    <p className="text-green-500">Available</p>
+                  </div>
+                ) : (
+                  <div className="flex items-center gap-2 text-sm text-center">
+                    <p className="w-2 h-2 bg-gray-400 rounded-full"></p>
+                    <p className="text-gray-400">Unavailable</p>
+                  </div>
+                )}
               </div>
               <p className="text-gray-900 text-lg font-medium">{item.name}</p>
               <p className="text-gray-600 text-sm">{item.speciality}</p>

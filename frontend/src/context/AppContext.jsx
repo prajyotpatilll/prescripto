@@ -12,6 +12,9 @@ const AppContextProvide = (props) => {
 
   const [doctors, setdoctors] = useState([]);
   const [token, settoken] = useState(localStorage.getItem('token')?localStorage.getItem('token'):false);
+  const [userdata, setuserdata] = useState(false)
+
+  const [image, setimage] = useState(false);
 
   const getalldoctors = async () => {
     try {
@@ -27,17 +30,44 @@ const AppContextProvide = (props) => {
     }
   };
 
+  const loaduserprofileData = async ()=>{
+
+    try {
+      const {data} = await axios.get(backendURL + '/api/user/user-profile', {headers:{token}})
+      if(data.success){
+        setuserdata(data.userdata)
+      }else{
+        toast.error(error.message);
+      }
+    } catch (error) {
+      toast.error(error.message);
+    }
+
+  }
+
   const value = {
     doctors,
     currencysem,
     token,
     settoken,
-    backendURL
+    backendURL,
+    userdata,setuserdata,
+    loaduserprofileData,
+
+    image, setimage
   };
 
   useEffect(() => {
     getalldoctors();
   }, []);
+
+  useEffect(()=>{
+    if(token){
+      loaduserprofileData()
+    }else{
+      setuserdata(false)
+    }
+  },[token])
 
   return (
     <AppContext.Provider value={value}>{props.children}</AppContext.Provider>

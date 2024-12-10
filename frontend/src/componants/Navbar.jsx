@@ -10,7 +10,7 @@ const Navbar = () => {
   //use navigate hook
   const navigate = useNavigate();
 
-  const {token, settoken} = useContext(AppContext)
+  const {token, settoken, image, userdata} = useContext(AppContext)
 
   //dropdown and login button
   const [showmenu, setshowmenu] = useState(false);
@@ -33,7 +33,7 @@ const Navbar = () => {
           <div className="flex items-center gap-6 cursor-pointer group relative">
             <img
               className="w-10 rounded-full"
-              src={assets.profile_pic}
+              src={userdata.image}
               alt=""
               srcSet=""
             />
