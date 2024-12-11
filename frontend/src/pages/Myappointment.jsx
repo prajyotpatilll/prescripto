@@ -1,32 +1,58 @@
-import React, { useContext } from 'react';
-import { AppContext } from '../context/AppContext';
+import React, { useContext, useEffect, useState } from "react";
+import { AppContext } from "../context/AppContext";
+import { toast } from "react-toastify";
+import axios from "axios";
 
 const Myappointment = () => {
-  const { doctors } = useContext(AppContext);
+  const { token,backendURL } = useContext(AppContext);
+  const [appointments, setappointsment] = useState([])
+
+  const getappointment = async ()=>{
+    try {
+      const {data} = await axios.get(backendURL + '/api/user/appointment',{headers:{token}})
+      if(data.success){
+        setappointsment(data.appointments.reverse())
+        console.log(data.appointments)
+      }
+    } catch (error) {
+      toast.error(error.message)
+    }
+  }
+
+  useEffect(()=>{
+     if(token){
+      getappointment()
+      
+     }
+  },[token])
+
   return (
     <div className="p-6  min-h-screen">
-      <p className="text-2xl font-semibold text-gray-800 mb-4">My Appointment</p>
+      <p className="text-2xl font-semibold text-gray-800 mb-4">
+        My Appointment
+      </p>
       <div className="space-y-6">
-        {doctors.slice(0, 3).map((item, index) => (
+        {appointments.map((item, index) => (
           <div
             key={index}
             className="bg-white shadow-lg rounded-lg p-4 flex flex-col md:flex-row items-center gap-4"
           >
             <div className="flex-shrink-0">
               <img
-                src={item.image}
-                alt={item.name}
+                src={item.docdata.image}
+                alt={item.docdata.name}
                 className="w-24 h-24 md:w-32 md:h-32 rounded-full object-cover"
               />
             </div>
             <div className="flex-grow">
-              <p className="text-lg font-semibold text-gray-700">{item.name}</p>
-              <p className="text-sm text-gray-500">{item.speciality}</p>
+              <p className="text-lg font-semibold text-gray-700">{item.docdata.name}</p>
+              <p className="text-sm text-gray-500">{item.docdata.speciality}</p>
               <p className="text-sm text-gray-600 mt-2">Address:</p>
-              <p className="text-sm text-gray-500">{item.address.line1}</p>
-              <p className="text-sm text-gray-500">{item.address.line2}</p>
+              <p className="text-sm text-gray-500">{item.docdata.address.line1}</p>
+              <p className="text-sm text-gray-500">{item.docdata.address.line2}</p>
               <p className="text-sm text-gray-600 mt-2">
-                <span className="font-medium text-gray-700">Date & Time:</span> 25, July, 2024 | 8:30 PM
+                <span className="font-medium text-gray-700">Date & Time:</span>{" "}
+                {item.slotdate} | {item.slottime}
               </p>
             </div>
             <div className="flex flex-col md:flex-row gap-2">
