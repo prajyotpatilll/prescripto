@@ -1,15 +1,18 @@
 import React, { useContext, useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { AppContext } from "../context/AppContext";
 import { assets } from "../assets/assets_frontend/assets";
 import Relateddoc from "../componants/Relateddoc";
 import Topdoctors from "../componants/Topdoctors";
 import Speciallitymenu from "../componants/Speciallitymenu";
+import { toast } from "react-toastify";
+import axios from "axios";
 
 
 const Appointment = () => {
   const { docid,speciality } = useParams();
-  const { doctors, currencysem } = useContext(AppContext);
+  const { doctors, currencysem,getalldoctors,token,backendURL } = useContext(AppContext);
+  const navigate = useNavigate()
 
   const daysofweek = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"];
   const [docinfo, setDoctorInfo] = useState(null);
@@ -63,6 +66,36 @@ const Appointment = () => {
       setdocslot((prev) => [...prev, timeslot]);
     }
   };
+
+  const bookappintment = async ()=>{
+    if(!token){
+      toast.warn('login to book appintment')
+      return navigate('/login')
+    }
+    try {
+      
+       const date = docslot[slotindex][0].datetime
+       let day = date.getDate()
+       let month = date.getMonth()+1
+       let year = date.getFullYear()
+
+       const slotdate = day + "_" + month + "_" + year
+
+       const {data} = await axios.post(backendURL + '/api/user/book-appointment', {docid, slotdate, slottime},{headers:{token}})
+
+       if(data.success){
+        toast.success(data.message)
+        getalldoctors()
+        navigate('/myappointment')        
+       }else{
+        toast.error(data.message)
+       }
+
+
+    } catch (error) {
+      toast.error(error.message);
+    }
+  }
 
   useEffect(() => {
     fetchinfo();
@@ -152,7 +185,7 @@ const Appointment = () => {
           ))}
       </div>
       <div className="flex items-center justify-center p-5">
-        <p className='flex items-center gap-2 bg-primary px-8 py-3 rounded-full  text-white text-sm  m-auto md:m-0 hover:scale-105 transition-all duration-300'>Book an appointment</p>
+        <button onClick={bookappintment} className='flex items-center gap-2 bg-primary px-8 py-3 rounded-full  text-white text-sm  m-auto md:m-0 hover:scale-105 transition-all duration-300'>Book an appointment</button>
       </div>
 
       <Topdoctors/>

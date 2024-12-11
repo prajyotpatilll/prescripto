@@ -13,8 +13,9 @@ const AppContextProvide = (props) => {
   const [doctors, setdoctors] = useState([]);
   const [token, settoken] = useState(localStorage.getItem('token')?localStorage.getItem('token'):false);
   const [userdata, setuserdata] = useState(false)
-
   const [image, setimage] = useState(false);
+
+//get all docotors
 
   const getalldoctors = async () => {
     try {
@@ -29,6 +30,8 @@ const AppContextProvide = (props) => {
       toast.error(error.message);
     }
   };
+
+// get profile data of user  
 
   const loaduserprofileData = async ()=>{
 
@@ -46,14 +49,13 @@ const AppContextProvide = (props) => {
   }
 
   const value = {
-    doctors,
+    doctors,getalldoctors,
     currencysem,
     token,
     settoken,
     backendURL,
     userdata,setuserdata,
     loaduserprofileData,
-
     image, setimage
   };
 
