@@ -8,11 +8,11 @@ import Speciallitymenu from "../componants/Speciallitymenu";
 import { toast } from "react-toastify";
 import axios from "axios";
 
-
 const Appointment = () => {
-  const { docid,speciality } = useParams();
-  const { doctors, currencysem,getalldoctors,token,backendURL } = useContext(AppContext);
-  const navigate = useNavigate()
+  const { docid, speciality } = useParams();
+  const { doctors, currencysem, getalldoctors, token, backendURL } =
+    useContext(AppContext);
+  const navigate = useNavigate();
 
   const daysofweek = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"];
   const [docinfo, setDoctorInfo] = useState(null);
@@ -55,10 +55,25 @@ const Appointment = () => {
           minute: "2-digit",
         });
 
-        timeslot.push({
-          datetime: new Date(currentdate),
-          time: formattedTime,
-        });
+        let day = currentdate.getDate();
+        let month = currentdate.getMonth() + 1;
+        let year = currentdate.getFullYear();
+
+        const slotdate = day + "_" + month + "_" + year;
+        const slottime = formattedTime;
+
+        const isslotisavailable =
+          docinfo.slotsbooked[slotdate] &&
+          docinfo.slotsbooked[slotdate].includes(slottime)
+            ? false
+            : true;
+
+        if (isslotisavailable) {
+          timeslot.push({
+            datetime: new Date(currentdate),
+            time: formattedTime,
+          });
+        }
 
         currentdate.setMinutes(currentdate.getMinutes() + 30);
       }
@@ -67,35 +82,36 @@ const Appointment = () => {
     }
   };
 
-  const bookappintment = async ()=>{
-    if(!token){
-      toast.warn('login to book appintment')
-      return navigate('/login')
+  const bookappintment = async () => {
+    if (!token) {
+      toast.warn("login to book appintment");
+      return navigate("/login");
     }
     try {
-      
-       const date = docslot[slotindex][0].datetime
-       let day = date.getDate()
-       let month = date.getMonth()+1
-       let year = date.getFullYear()
+      const date = docslot[slotindex][0].datetime;
+      let day = date.getDate();
+      let month = date.getMonth() + 1;
+      let year = date.getFullYear();
 
-       const slotdate = day + "_" + month + "_" + year
+      const slotdate = day + "_" + month + "_" + year;
 
-       const {data} = await axios.post(backendURL + '/api/user/book-appointment', {docid, slotdate, slottime},{headers:{token}})
+      const { data } = await axios.post(
+        backendURL + "/api/user/book-appointment",
+        { docid, slotdate, slottime },
+        { headers: { token } }
+      );
 
-       if(data.success){
-        toast.success(data.message)
-        getalldoctors()
-        navigate('/myappointment')        
-       }else{
-        toast.error(data.message)
-       }
-
-
+      if (data.success) {
+        toast.success(data.message);
+        getalldoctors();
+        navigate("/myappointment");
+      } else {
+        toast.error(data.message);
+      }
     } catch (error) {
       toast.error(error.message);
     }
-  }
+  };
 
   useEffect(() => {
     fetchinfo();
@@ -107,9 +123,7 @@ const Appointment = () => {
     }
   }, [docinfo]);
 
-  useEffect(() => {
-    
-  }, [docslot]);
+  useEffect(() => {}, [docslot]);
 
   return (
     <div>
@@ -185,11 +199,15 @@ const Appointment = () => {
           ))}
       </div>
       <div className="flex items-center justify-center p-5">
-        <button onClick={bookappintment} className='flex items-center gap-2 bg-primary px-8 py-3 rounded-full  text-white text-sm  m-auto md:m-0 hover:scale-105 transition-all duration-300'>Book an appointment</button>
+        <button
+          onClick={bookappintment}
+          className="flex items-center gap-2 bg-primary px-8 py-3 rounded-full  text-white text-sm  m-auto md:m-0 hover:scale-105 transition-all duration-300"
+        >
+          Book an appointment
+        </button>
       </div>
 
-      <Topdoctors/>
-   
+      <Topdoctors />
 
       {/* <Relateddoc docid={docid} speciality={speciality} /> */}
     </div>
