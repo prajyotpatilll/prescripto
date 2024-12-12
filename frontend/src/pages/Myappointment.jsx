@@ -4,36 +4,73 @@ import { toast } from "react-toastify";
 import axios from "axios";
 
 const Myappointment = () => {
-  const { token,backendURL } = useContext(AppContext);
-  const [appointments, setappointsment] = useState([])
+  const { token, backendURL,getalldoctors } = useContext(AppContext);
+  const [appointments, setappointsment] = useState([]);
 
-  const month = ['', 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+  const month = [
+    "",
+    "Jan",
+    "Feb",
+    "Mar",
+    "Apr",
+    "May",
+    "Jun",
+    "Jul",
+    "Aug",
+    "Sep",
+    "Oct",
+    "Nov",
+    "Dec",
+  ];
 
-const slotdateformate = (slotdate) => {
+  const slotdateformate = (slotdate) => {
+    const datearray = slotdate.split("_");
 
-  const datearray = slotdate.split('_');
+    return (
+      datearray[0] + " " + month[Number(datearray[1])] + " " + datearray[2]
+    );
+  };
 
-  return datearray[0] + " " + month[Number(datearray[1])] + " " + datearray[2];
-};
-
-  const getappointment = async ()=>{
+  const getappointment = async () => {
     try {
-      const {data} = await axios.get(backendURL + '/api/user/appointment',{headers:{token}})
-      if(data.success){
-        setappointsment(data.appointments.reverse())
-        console.log(data.appointments)
+      const { data } = await axios.get(backendURL + "/api/user/appointment", {
+        headers: { token },
+      });
+      if (data.success) {
+        setappointsment(data.appointments.reverse());
+        console.log(data.appointments);
       }
     } catch (error) {
-      toast.error(error.message)
+      toast.error(error.message);
     }
-  }
+  };
 
-  useEffect(()=>{
-     if(token){
-      getappointment()
-      
-     }
-  },[token])
+  // cancel appointment
+
+  const cancelappointment = async (appointmentid) => {
+    try {
+      const { data } = await axios.post(
+        backendURL + "/api/user/cancel-appointment",
+        { appointmentid },
+        { headers: { token } }
+      );
+      if (data.success) {
+        toast.success(data.message);
+        getappointment();
+        getalldoctors()
+      } else {
+        toast.error(data.message);
+      }
+    } catch (error) {
+      toast.error(error.message);
+    }
+  };
+
+  useEffect(() => {
+    if (token) {
+      getappointment();
+    }
+  }, [token]);
 
   return (
     <div className="p-6  min-h-screen">
@@ -54,24 +91,41 @@ const slotdateformate = (slotdate) => {
               />
             </div>
             <div className="flex-grow">
-              <p className="text-lg font-semibold text-gray-700">{item.docdata.name}</p>
+              <p className="text-lg font-semibold text-gray-700">
+                {item.docdata.name}
+              </p>
               <p className="text-sm text-gray-500">{item.docdata.speciality}</p>
               <p className="text-sm text-gray-600 mt-2">Address:</p>
-              <p className="text-sm text-gray-500">{item.docdata.address.line1}</p>
-              <p className="text-sm text-gray-500">{item.docdata.address.line2}</p>
+              <p className="text-sm text-gray-500">
+                {item.docdata.address.line1}
+              </p>
+              <p className="text-sm text-gray-500">
+                {item.docdata.address.line2}
+              </p>
               <p className="text-sm text-gray-600 mt-2">
                 <span className="font-medium text-gray-700">Date & Time:</span>{" "}
                 {slotdateformate(item.slotdate)} | {item.slottime}
               </p>
             </div>
-            <div className="flex flex-col md:flex-row gap-2">
-              <button className="px-4 py-2 bg-blue-600 text-white text-sm font-medium rounded hover:bg-blue-700">
-                Pay Online
-              </button>
-              <button className="px-4 py-2 bg-red-500 text-white text-sm font-medium rounded hover:bg-red-600">
-                Cancel Appointment
-              </button>
-            </div>
+            {!item.cancelled ? (
+              <div className="flex flex-col md:flex-row gap-2">
+                <button className="px-4 py-2 bg-blue-600 text-white text-sm font-medium rounded hover:bg-blue-700">
+                  Pay Online
+                </button>
+                <button
+                  onClick={() => cancelappointment(item._id)}
+                  className="px-4 py-2 bg-red-500 text-white text-sm font-medium rounded hover:bg-red-600"
+                >
+                  Cancel Appointment
+                </button>
+              </div>
+            ) : (
+              <div className="flex flex-col md:flex-row gap-2">
+                <div className="p-4 bg-red-100 border border-red-400 text-red-700 rounded-md">
+                  Appointment has been cancelled
+                </div>
+              </div>
+            )}
           </div>
         ))}
       </div>

@@ -204,10 +204,38 @@ const listappointment = async (req, res) => {
 const cancelappointment = async (req, res) => {
    try {
       const { userid, appointmentid } = req.body
+      
+
+      const appoinrmentData = await appointmentModel.findById(appointmentid)
+
+      if(!appoinrmentData){
+         return res.json({ success: false, message:"appointment id not shown" })
+      }
+
+      if(appoinrmentData.userid !== userid){
+          return res.json({ success: false, message:"unauthorized request" })
+      }
+
+      await appointmentModel.findByIdAndUpdate(appointmentid,{cancelled:true})
+
+      //releasing docotr slot
+
+      const {docid,slotdate,slottime}=appoinrmentData
+
+      const docdata= await doctorModel.findById(docid)
+
+      let slotsbooked = docdata.slotsbooked
+
+      slotsbooked[slotdate] = slotsbooked[slotdate].filter(e =>  e !== slottime)
+
+      await doctorModel.findByIdAndUpdate(docid,{slotsbooked})
+
+      res.json({success:true,message:'appointment cancelled'})
+
    } catch (error) {
       console.log(error)
       res.json({ success: false, message: error.message })
    }
 }
 
-export { registerUser, loginUser, getprofile, updateprofile, bookappintmrnt, listappointment } 
+export { registerUser, loginUser, getprofile, updateprofile, bookappintmrnt, listappointment,cancelappointment } 
