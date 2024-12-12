@@ -10,6 +10,8 @@ const AdminContextProvide = (props) =>{
     const [atoken, setatoken] = useState(localStorage.getItem('atoken')?localStorage.getItem('atoken'): '')
     const BackendUrl = import.meta.env.VITE_BACKEND_URL
 
+    const [appointments, setappointsment] = useState([])
+
     // THIS FUNCTION IS USED GET ALL DOCOTRS DATA FROM DATABASE
 
     const [doctors, setdoctors] = useState([])
@@ -19,7 +21,7 @@ const AdminContextProvide = (props) =>{
             const {data} = await axios.post(BackendUrl +"/api/admin/all-doctors",{},{headers:{atoken}})
             if (data.success) {
                 setdoctors(data.doctors)
-                console.log(data.doctors)
+                
             } else {
                 toast.error(data.error)
             }
@@ -44,11 +46,28 @@ const AdminContextProvide = (props) =>{
            }
     }
 
+    //get all appointments
+
+    const getallappointments = async ()=>{
+        try {
+            const {data} = await axios.get(BackendUrl + '/api/admin/appointment-data',{headers:{atoken}})
+            if(data.success){
+                setappointsment(data.appointments)
+                console.log(data.appointments)
+            }else{
+                toast.error(data.message)
+            }
+        } catch (error) {
+            toast.error(error.message)
+        }       
+    }
+
     const value ={
           atoken , setatoken,
           BackendUrl,
           getAlldocotrs,doctors,
-          chngeavailability
+          chngeavailability,
+          getallappointments,setappointsment,appointments
           
     }
 
