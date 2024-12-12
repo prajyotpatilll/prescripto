@@ -133,28 +133,28 @@ const updateprofile = async (req, res) => {
 
 //api to book appintment
 
-const bookappintmrnt = async (req,res)=>{
+const bookappintmrnt = async (req, res) => {
    try {
 
-      const {userid,docid,slotdate,slottime}= req.body
+      const { userid, docid, slotdate, slottime } = req.body
 
       const docdata = await doctorModel.findById(docid).select('-password')
 
-      if(!docdata.available){
+      if (!docdata.available) {
          return res.json({ success: false, message: "doctor is not available" })
       }
 
-      let slotsbooked = docdata.slotsbooked 
+      let slotsbooked = docdata.slotsbooked
 
-      if(slotsbooked[slotdate]){
-         if(slotsbooked[slotdate].includes(slottime)){
+      if (slotsbooked[slotdate]) {
+         if (slotsbooked[slotdate].includes(slottime)) {
             return res.json({ success: false, message: "slot is not available" })
-         }else{
+         } else {
             slotsbooked[slotdate].push(slottime)
          }
-      }else{
+      } else {
          slotsbooked[slotdate] = []
-         slotsbooked[slotdate].push(slottime) 
+         slotsbooked[slotdate].push(slottime)
       }
 
       const userdata = await userModel.findById(userid).select('-password')
@@ -165,7 +165,7 @@ const bookappintmrnt = async (req,res)=>{
          docid,
          userdata,
          docdata,
-         amount:docdata.fees,
+         amount: docdata.fees,
          slottime,
          slotdate,
          date: Date.now()
@@ -175,15 +175,39 @@ const bookappintmrnt = async (req,res)=>{
 
       await newappintment.save()
 
-      await doctorModel.findByIdAndUpdate(docid,{slotsbooked})
+      await doctorModel.findByIdAndUpdate(docid, { slotsbooked })
 
       res.json({ success: true, message: "Appintment booked" })
-      
+
    } catch (error) {
       console.log(error)
       res.json({ success: false, message: error.message })
    }
 }
 
+//api to get use appointment
 
-export { registerUser, loginUser, getprofile, updateprofile, bookappintmrnt } 
+const listappointment = async (req, res) => {
+   try {
+      const { userid } = req.body
+      const appointments = await appointmentModel.find({ userid })
+
+      res.json({ success: true, appointments })
+   } catch (error) {
+      console.log(error)
+      res.json({ success: false, message: error.message })
+   }
+}
+
+//api to cancel appintment
+
+const cancelappointment = async (req, res) => {
+   try {
+      const { userid, appointmentid } = req.body
+   } catch (error) {
+      console.log(error)
+      res.json({ success: false, message: error.message })
+   }
+}
+
+export { registerUser, loginUser, getprofile, updateprofile, bookappintmrnt, listappointment } 

@@ -7,6 +7,15 @@ const Myappointment = () => {
   const { token,backendURL } = useContext(AppContext);
   const [appointments, setappointsment] = useState([])
 
+  const month = ['', 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+
+const slotdateformate = (slotdate) => {
+
+  const datearray = slotdate.split('_');
+
+  return datearray[0] + " " + month[Number(datearray[1])] + " " + datearray[2];
+};
+
   const getappointment = async ()=>{
     try {
       const {data} = await axios.get(backendURL + '/api/user/appointment',{headers:{token}})
@@ -52,7 +61,7 @@ const Myappointment = () => {
               <p className="text-sm text-gray-500">{item.docdata.address.line2}</p>
               <p className="text-sm text-gray-600 mt-2">
                 <span className="font-medium text-gray-700">Date & Time:</span>{" "}
-                {item.slotdate} | {item.slottime}
+                {slotdateformate(item.slotdate)} | {item.slottime}
               </p>
             </div>
             <div className="flex flex-col md:flex-row gap-2">
