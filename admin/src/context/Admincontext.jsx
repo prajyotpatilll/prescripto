@@ -11,6 +11,7 @@ const AdminContextProvide = (props) =>{
     const BackendUrl = import.meta.env.VITE_BACKEND_URL
 
     const [appointments, setappointsment] = useState([])
+    const [dashdata, setdashdata ] = useState(false)
 
     // THIS FUNCTION IS USED GET ALL DOCOTRS DATA FROM DATABASE
 
@@ -62,13 +63,29 @@ const AdminContextProvide = (props) =>{
         }       
     }
 
+    //getdashboard data
+
+    const dashboarddata = async ()=>{
+        try {
+            const {data} = await axios.get(BackendUrl+'/api/admin/admindash',{headers:{atoken}})
+            if(data.success){
+                setdashdata(data.dashdata)
+                console.log(data.dashdata)
+            }else{
+                toast.error(data.message)
+            }
+        } catch (error) {
+            toast.error(error.message)
+        }
+    }
+
     const value ={
           atoken , setatoken,
           BackendUrl,
           getAlldocotrs,doctors,
           chngeavailability,
-          getallappointments,setappointsment,appointments
-          
+          getallappointments,setappointsment,appointments,
+          dashboarddata,dashdata
     }
 
     return(

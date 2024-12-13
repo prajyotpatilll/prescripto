@@ -85,7 +85,7 @@ const Allapointment = () => {
                 {item.slottime}
               </td>
               <td className="px-6 py-4 text-sm text-gray-600">
-                {!item.cancelled ? <p className="text-red-600">cancelled</p> : <div>
+                {item.cancelled ? <p className="text-red-600">cancelled</p> : <div>
                   {
                     item.iscomplete ? <p> Completed</p>
                     : <p className="text-green-600">Active</p>

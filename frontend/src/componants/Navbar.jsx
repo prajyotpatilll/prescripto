@@ -10,16 +10,15 @@ const Navbar = () => {
   //use navigate hook
   const navigate = useNavigate();
 
-  const {token, settoken, image, userdata} = useContext(AppContext)
+  const { token, settoken, image, userdata } = useContext(AppContext);
 
   //dropdown and login button
   const [showmenu, setshowmenu] = useState(false);
 
-  const logout= ()=>{
-    settoken(false)
-    localStorage.removeItem('token')
-  }
-  
+  const logout = () => {
+    settoken(false);
+    localStorage.removeItem("token");
+  };
 
   return (
     <div className="flex items-center justify-around py-4 mb-5 border-b border-b-gray-400">
@@ -53,7 +52,10 @@ const Navbar = () => {
                   My appointment
                 </p>
                 <p
-                  onClick={logout}
+                  onClick={() => {
+                    logout();
+                    navigate("./");
+                  }}
                   className="hover:text-black cursor-pointer"
                 >
                   Logout
@@ -82,7 +84,7 @@ const Navbar = () => {
         >
           <div className="flex items-center justify-between px-4 py-3">
             <img
-            className="w-auto h-10"
+              className="w-auto h-10"
               onClick={() => {
                 navigate("./"); // Navigate to the home page
                 setshowmenu(false); // Hide the menu
