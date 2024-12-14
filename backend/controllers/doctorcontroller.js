@@ -66,6 +66,69 @@ const doctorappointments = async (req,res) =>{
     }
 }
 
+const cancelappointment = async (req,res) =>{
+    try {
+        const { docid, appointmentid } = req.body
+        
+  
+        const appoinrmentData = await appointmentModel.findById(appointmentid)
+  
+        if(!appoinrmentData){
+           return res.json({ success: false, message:"appointment id not shown" })
+        }
+  
+        if(appoinrmentData.docid !== docid){
+            return res.json({ success: false, message:"unauthorized request" })
+        }
+  
+        await appointmentModel.findByIdAndUpdate(appointmentid,{cancelled:true})
+  
+        //releasing docotr slot
+  
+        const {slotdate,slottime}=appoinrmentData
+  
+        const docdata= await doctorModel.findById(docid)
+  
+        let slotsbooked = docdata.slotsbooked
+  
+        slotsbooked[slotdate] = slotsbooked[slotdate].filter(e =>  e !== slottime)
+  
+        await doctorModel.findByIdAndUpdate(docid,{slotsbooked})
+  
+        res.json({success:true,message:'appointment cancelled'})
+  
+     } catch (error) {
+        console.log(error)
+        res.json({ success: false, message: error.message })
+     }
+}
+
+const completed = async (req,res)=>{
+    try {
+        const { docid, appointmentid } = req.body
+        
+  
+        const appoinrmentData = await appointmentModel.findById(appointmentid)
+  
+        if(!appoinrmentData){
+           return res.json({ success: false, message:"appointment id not shown" })
+        }
+  
+        if(appoinrmentData.docid !== docid){
+            return res.json({ success: false, message:"unauthorized request" })
+        }
+  
+        await appointmentModel.findByIdAndUpdate(appointmentid,{iscomplete:true})
+
+  
+        res.json({success:true,message:'appointment completed'})
+  
+     } catch (error) {
+        console.log(error)
+        res.json({ success: false, message: error.message })
+     }
+}
 
 
-export {changeavailability,docotrlist,doctorlogin,doctorappointments}
+
+export {changeavailability,docotrlist,doctorlogin,doctorappointments,cancelappointment,completed}

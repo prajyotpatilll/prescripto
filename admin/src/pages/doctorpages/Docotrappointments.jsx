@@ -1,9 +1,12 @@
 import React, { useContext, useEffect } from "react";
 import { DoctorContext } from "../../context/Doctorcontext";
 import { assets } from "../../assets/assets";
+import { toast } from "react-toastify";
+import axios from "axios";
 
 const Docotrappointments = () => {
-  const { appointments, docappointment, dtoken } = useContext(DoctorContext);
+  const { appointments, docappointment, dtoken, BackendUrl } =
+    useContext(DoctorContext);
   const month = [
     "",
     "Jan",
@@ -28,9 +31,50 @@ const Docotrappointments = () => {
     );
   };
 
+  const cancelappointment = async (appointmentid) => {
+    try {
+      const { data } = await axios.post(
+        BackendUrl + "/api/doctor/cancelappointment",
+        { appointmentid },
+        { headers: { dtoken } }
+      );
+      if (data.success) {
+        toast.success(data.message);
+        docappointment();
+      } else {
+        toast.error(data.message);
+      }
+    } catch (error) {
+      toast.error(error.message);
+    }
+  };
+
+  const iscomplete = async (appointmentid) => {
+    try {
+      const { data } = await axios.post(
+        BackendUrl + "/api/doctor/completed",
+        { appointmentid },
+        { headers: { dtoken } }
+      );
+      if (data.success) {
+        toast.success(data.message);
+        docappointment();
+      } else {
+        toast.error(data.message);
+      }
+    } catch (error) {
+      toast.error(error.message);
+    }
+  };
+
+  const docid = (docid) => {
+    console.log(docid);
+  };
+
   useEffect(() => {
     if (dtoken) {
       docappointment();
+      docid();
     }
   }, [dtoken]);
   return (
@@ -80,7 +124,7 @@ const Docotrappointments = () => {
                 ) : (
                   <div>
                     {item.iscomplete ? (
-                      <p> Completed</p>
+                      <p className="text-green-600"> Completed</p>
                     ) : (
                       <p className="text-green-600">Active</p>
                     )}
@@ -88,16 +132,34 @@ const Docotrappointments = () => {
                 )}
               </td>
               <td className="px-6 py-4 text-sm text-gray-600">
-                {
-                    item.cancelled?<div className="flex items-center">
-                   
-                   <img src={assets.cancel_icon} alt="" />
-                  </div>:
+                {item.cancelled ? (
                   <div className="flex items-center">
-                  <img src={assets.tick_icon} alt="" />
-                  <img src={assets.cancel_icon} alt="" />
-                </div>
-                }
+                    <img src={assets.cancel_icon} alt="" />
+                  </div>
+                ) : (
+                  <div className="flex items-center">
+                    {item.iscomplete ? (
+                      <img
+                        onClick={() => iscomplete(item._id)}
+                        src={assets.tick_icon}
+                        alt=""
+                      />
+                    ) : (
+                      <div className="flex items-center">
+                        <img
+                          onClick={() => iscomplete(item._id)}
+                          src={assets.tick_icon}
+                          alt=""
+                        />
+                        <img
+                          onClick={() => cancelappointment(item._id)}
+                          src={assets.cancel_icon}
+                          alt=""
+                        />
+                      </div>
+                    )}
+                  </div>
+                )}
               </td>
             </tr>
           ))}
