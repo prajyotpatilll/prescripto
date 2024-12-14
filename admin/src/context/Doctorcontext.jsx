@@ -1,17 +1,43 @@
-import { createContext } from "react";
+import axios from "axios";
+import { createContext, useState } from "react";
+import { toast } from "react-toastify";
 
-export const DoctorContext = createContext()
+export const DoctorContext = createContext();
 
-const DoctorContextProvide = (props) =>{
-    const value ={
+const DoctorContextProvide = (props) => {
+  const BackendUrl = import.meta.env.VITE_BACKEND_URL;
+  const [dtoken, setdtoken] = useState(
+    localStorage.getItem("dtoken") ? localStorage.getItem("dtoken") : ""
+  );
 
+  const [ appointments, setappointments] = useState([])
+
+  const docappointment = async ()=>{
+    try {
+       const {data} = await axios.get(BackendUrl + '/api/doctor/docappointments',{headers:{dtoken}})
+       if(data.success){
+        setappointments(data.appointments)
+        console.log(data.appointments)
+       }else{
+        toast.error(data.message)
+       }
+    } catch (error) {
+        toast.error(error.message)
     }
+  }
 
-    return(
-        <DoctorContext.Provider value={value}>
-               {props.children}
-        </DoctorContext.Provider>
-    )
-}
+  const value = {
+    dtoken,
+    setdtoken,
+    BackendUrl,
+    appointments,docappointment
+  };
 
-export default DoctorContextProvide
+  return (
+    <DoctorContext.Provider value={value}>
+      {props.children}
+    </DoctorContext.Provider>
+  );
+};
+
+export default DoctorContextProvide;

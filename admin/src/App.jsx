@@ -10,11 +10,16 @@ import Dashboard from "./pages/adminpages/Dashboard";
 import Allapointment from "./pages/adminpages/Allapointment";
 import Adddoctor from "./pages/adminpages/Adddoctor";
 import Doctorslist from "./pages/adminpages/Doctorslist";
+import { DoctorContext } from "./context/Doctorcontext";
+import Doctordash from "./pages/doctorpages/Doctordash";
+import Docotrappointments from "./pages/doctorpages/Docotrappointments";
+import Doctorprofile from "./pages/doctorpages/Doctorprofile";
 
 const App = () => {
   const { atoken } = useContext(AdminContext);
+  const { dtoken } = useContext(DoctorContext);
 
-  return atoken ? (
+  return atoken || dtoken ? (
     <div className="flex flex-col min-h-screen bg-gray-50">
       <ToastContainer />
 
@@ -29,11 +34,16 @@ const App = () => {
 
         <main className="flex-grow p-6 bg-gray-100">
           <Routes>
+            {/* admin routes */}
             <Route path="/" element={<></>} />
             <Route path="/admin-dashboard" element={<Dashboard />} />
             <Route path="/all-Appintment" element={<Allapointment />} />
             <Route path="/add-doctor" element={<Adddoctor />} />
             <Route path="/doctor-list" element={<Doctorslist />} />
+            {/* doctors routes */}
+            <Route path="/doc-dashbord" element={<Doctordash />} />
+            <Route path="/doc-appointment" element={<Docotrappointments />} />
+            <Route path="/doc-profile" element={<Doctorprofile />} />
           </Routes>
         </main>
       </div>
