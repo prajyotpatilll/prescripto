@@ -2,6 +2,7 @@ import doctorModel from "../models/doctormodel.js"
 import jwt from "jsonwebtoken"
 import bcrypt from "bcrypt"
 import appointmentModel from "../models/appointmentmodel.js"
+import userModel from "../models/usermodel.js"
 
 
 const changeavailability = async (req,res)=>{
@@ -129,6 +130,28 @@ const completed = async (req,res)=>{
      }
 }
 
+const docdash = async (req,res) =>{
+    try {
+        const { docid } = req.body
+        
+        
+        const appointment = await appointmentModel.find({docid})
+
+        const dashdata = {
+            
+      
+            appointments: appointment.length,
+            latestappointment: appointment.reverse().slice(0,5)
+        }
+
+        res.json({ success: true, dashdata })
+    } catch (error) {
+        console.log(error)
+        res.json({ success: false, message: error.message })
+    }
+
+}
 
 
-export {changeavailability,docotrlist,doctorlogin,doctorappointments,cancelappointment,completed}
+
+export {changeavailability,docotrlist,doctorlogin,doctorappointments,cancelappointment,completed, docdash}

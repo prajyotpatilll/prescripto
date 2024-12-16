@@ -11,6 +11,7 @@ const DoctorContextProvide = (props) => {
   );
 
   const [ appointments, setappointments] = useState([])
+  const [dashdata, setdashdata ] = useState(false)
 
   const docappointment = async ()=>{
     try {
@@ -26,11 +27,25 @@ const DoctorContextProvide = (props) => {
     }
   }
 
+  const dashboarddata = async ()=>{
+    try {
+        const {data} = await axios.get(BackendUrl+'/api/doctor/doc-dash',{headers:{dtoken}})
+        if(data.success){
+            setdashdata(data.dashdata)
+            console.log(data.dashdata)
+        }else{
+            toast.error(data.message)
+        }
+    } catch (error) {
+        toast.error(error.message)
+    }
+}
+
   const value = {
     dtoken,
     setdtoken,
     BackendUrl,
-    appointments,docappointment
+    appointments,docappointment,dashboarddata,dashdata
   };
 
   return (

@@ -139,11 +139,7 @@ const Docotrappointments = () => {
                 ) : (
                   <div className="flex items-center">
                     {item.iscomplete ? (
-                      <img
-                        onClick={() => iscomplete(item._id)}
-                        src={assets.tick_icon}
-                        alt=""
-                      />
+                      <img src={assets.tick_icon} alt="" />
                     ) : (
                       <div className="flex items-center">
                         <img
