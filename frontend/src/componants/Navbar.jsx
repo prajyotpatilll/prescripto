@@ -65,11 +65,13 @@ const Navbar = () => {
           </div>
         ) : (
           <button
-            onClick={() => navigate("./Login")}
-            className="px-6 py-2  bg-blue-500 text-white rounded-full font-light h-15"
-          >
-            Create Account
-          </button>
+          onClick={() => navigate("./Login")}
+          className="w-full sm:w-auto px-3 sm:px-6 py-2 sm:py-2 bg-blue-500 text-white rounded-full font-light text-xs sm:text-base transition-all duration-200 hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50"
+        >
+          Create Account
+        </button>
+        
+
         )}
         <img
           onClick={() => setshowmenu(true)}
@@ -84,7 +86,7 @@ const Navbar = () => {
         >
           <div className="flex items-center justify-between px-4 py-3">
             <img
-              className="w-auto h-10"
+              className="w-32 sm:w-40 md:w-50 lg:w-55 cursor-pointer"
               onClick={() => {
                 navigate("./"); // Navigate to the home page
                 setshowmenu(false); // Hide the menu

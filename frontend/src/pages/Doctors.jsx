@@ -25,9 +25,10 @@ const Doctors = () => {
   };
 
   return (
-    <div className="flex justify-between ">
-      <div className="w-1/4 mr-10">
-        <h2 className="text-xl py-4 ">Browse through the doctors specialist</h2>
+    <div className="flex flex-col lg:flex-row justify-between gap-6">
+      {/* Sidebar */}
+      <div className="lg:w-1/4 w-full lg:mr-10">
+        <h2 className="text-xl py-4">Browse through the doctors specialist</h2>
         <div className="space-y-3">
           <p
             onClick={() => handleSpecialtyClick("General physician")}
@@ -62,15 +63,16 @@ const Doctors = () => {
         </div>
       </div>
 
-      {/* part second */}
-      <div className="w-3/4 grid grid-cols-auto gap-5 pt-5 gap-y-6 px-3 sm:px-0 ">
+      {/* Main Content */}
+      <div className="lg:w-3/4 w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-5 pt-5 px-3 sm:px-0">
+
         {filterdoc.map((item, index) => (
           <div
             key={item._id}
             onClick={() => navigate(`/appointment/${item._id}`)}
             className="border border-blue-200 rounded-xl overflow-hidden cursor-pointer transform transition duration-300 hover:scale-105"
           >
-            <img className="bg-blue-50" src={item.image} alt="" />
+            <img className="bg-blue-50 w-full h-50 object-cover" src={item.image} alt="" />
             <div className="p-4">
               <div className="flex items-center gap-2 text-sm text-center text-green-500">
                 {item.available ? (
@@ -85,7 +87,7 @@ const Doctors = () => {
                   </div>
                 )}
               </div>
-              <p className="text-gray-900 text-lg font-medium">{item.name}</p>
+              <p className="text-gray-900 text-lg font-medium mt-2">{item.name}</p>
               <p className="text-gray-600 text-sm">{item.speciality}</p>
             </div>
           </div>

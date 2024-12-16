@@ -152,6 +152,21 @@ const docdash = async (req,res) =>{
 
 }
 
+const getprofile = async (req, res) => {
+
+    try {
+ 
+       const { docid } = req.body
+       const docdata = await doctorModel.findById(docid).select('-password')
+ 
+       res.json({ success: true, docdata })
+ 
+    } catch (error) {
+       console.log(error)
+       res.json({ success: false, message: error.message })
+    }
+ 
+ }
 
 
-export {changeavailability,docotrlist,doctorlogin,doctorappointments,cancelappointment,completed, docdash}
+export {changeavailability,docotrlist,doctorlogin,doctorappointments,cancelappointment,completed, docdash, getprofile}
