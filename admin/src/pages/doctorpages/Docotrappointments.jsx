@@ -7,6 +7,7 @@ import axios from "axios";
 const Docotrappointments = () => {
   const { appointments, docappointment, dtoken, BackendUrl } =
     useContext(DoctorContext);
+
   const month = [
     "",
     "Jan",
@@ -25,7 +26,6 @@ const Docotrappointments = () => {
 
   const slotdateformate = (slotdate) => {
     const datearray = slotdate.split("_");
-
     return (
       datearray[0] + " " + month[Number(datearray[1])] + " " + datearray[2]
     );
@@ -67,29 +67,24 @@ const Docotrappointments = () => {
     }
   };
 
-  const docid = (docid) => {
-    console.log(docid);
-  };
-
   useEffect(() => {
     if (dtoken) {
       docappointment();
-      docid();
     }
   }, [dtoken]);
+
   return (
-    <div className="overflow-x-auto bg-white shadow-md rounded-lg">
-      <table className="min-w-full table-auto border-collapse">
+    <div className="overflow-x-auto bg-white shadow-md rounded-lg p-6">
+      <table className="min-w-full table-auto border-collapse text-sm">
         <thead>
           <tr className="bg-gray-100 text-left text-sm font-medium text-gray-600">
-            <th className="px-6 py-3">#</th>
-
-            <th className="px-6 py-3">User's Image</th>
-            <th className="px-6 py-3">User's Name</th>
-            <th className="px-6 py-3">Appointment Date</th>
-            <th className="px-6 py-3">Appointment Time</th>
-            <th className="px-6 py-3">Status</th>
-            <th className="px-6 py-3">Completed</th>
+            <th className="px-4 py-3">#</th>
+            <th className="px-4 py-3">User's Image</th>
+            <th className="px-4 py-3">User's Name</th>
+            <th className="px-4 py-3">Appointment Date</th>
+            <th className="px-4 py-3">Appointment Time</th>
+            <th className="px-4 py-3">Status</th>
+            <th className="px-4 py-3">Completed</th>
           </tr>
         </thead>
         <tbody>
@@ -100,57 +95,56 @@ const Docotrappointments = () => {
                 index % 2 === 0 ? "bg-gray-50" : "bg-white"
               } hover:bg-gray-100`}
             >
-              <td className="px-6 py-4 text-sm text-gray-800">{index + 1}</td>
-
-              <td className="px-6 py-4">
+              <td className="px-4 py-4 text-sm text-gray-800">{index + 1}</td>
+              <td className="px-4 py-4">
                 <img
                   src={item.userdata.image}
                   alt="User"
                   className="w-12 h-12 rounded-full object-cover"
                 />
               </td>
-              <td className="px-6 py-4 text-sm text-gray-800">
+              <td className="px-4 py-4 text-sm text-gray-800">
                 {item.userdata.name}
               </td>
-              <td className="px-6 py-4 text-sm text-gray-600">
+              <td className="px-4 py-4 text-sm text-gray-600">
                 {slotdateformate(item.slotdate)}
               </td>
-              <td className="px-6 py-4 text-sm text-gray-600">
-                {item.slottime}
-              </td>
-              <td className="px-6 py-4 text-sm text-gray-600">
+              <td className="px-4 py-4 text-sm text-gray-600">{item.slottime}</td>
+              <td className="px-4 py-4 text-sm text-gray-600">
                 {item.cancelled ? (
                   <p className="text-red-600">cancelled</p>
                 ) : (
                   <div>
                     {item.iscomplete ? (
-                      <p className="text-green-600"> Completed</p>
+                      <p className="text-green-600">Completed</p>
                     ) : (
                       <p className="text-green-600">Active</p>
                     )}
                   </div>
                 )}
               </td>
-              <td className="px-6 py-4 text-sm text-gray-600">
+              <td className="px-4 py-4 text-sm text-gray-600">
                 {item.cancelled ? (
-                  <div className="flex items-center">
-                    <img src={assets.cancel_icon} alt="" />
+                  <div className="flex items-center justify-center">
+                    <img src={assets.cancel_icon} alt="Cancelled" className="w-6 h-6" />
                   </div>
                 ) : (
-                  <div className="flex items-center">
+                  <div className="flex items-center justify-center space-x-2">
                     {item.iscomplete ? (
-                      <img src={assets.tick_icon} alt="" />
+                      <img src={assets.tick_icon} alt="Completed" className="w-6 h-6" />
                     ) : (
-                      <div className="flex items-center">
+                      <div className="flex space-x-2">
                         <img
                           onClick={() => iscomplete(item._id)}
                           src={assets.tick_icon}
-                          alt=""
+                          alt="Complete"
+                          className="w-6 h-6 cursor-pointer"
                         />
                         <img
                           onClick={() => cancelappointment(item._id)}
                           src={assets.cancel_icon}
-                          alt=""
+                          alt="Cancel"
+                          className="w-6 h-6 cursor-pointer"
                         />
                       </div>
                     )}

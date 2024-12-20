@@ -74,209 +74,206 @@ const Adddoctor = () => {
 
   return (
     <form
-      onSubmit={onsubmitHandler}
-      className="flex justify-center items-center min-h-screen bg-gray-100 p-4 "
-    >
-      <div className="w-full max-w-4xl min-h-screen bg-white p-6 rounded-lg shadow-lg ">
-        <h2 className="text-2xl font-bold text-gray-800 text-center mb-6">
-          Add Doctor
-        </h2>
+  onSubmit={onsubmitHandler}
+  className="flex justify-center items-center min-h-screen bg-gray-100 p-4 sm:p-6 md:p-8"
+>
+  <div className="w-full max-w-lg sm:max-w-2xl md:max-w-3xl bg-white p-6 rounded-lg shadow-lg">
+    <h2 className="text-2xl font-bold text-gray-800 text-center mb-6">
+      Add Doctor
+    </h2>
 
-        {/* Doctor Image */}
-        <div className="flex flex-col items-center justify-center gap-2 p-4 border border-dashed border-gray-300 rounded-lg hover:border-gray-500 transition">
-          <label htmlFor="doc-img" className="cursor-pointer">
-            <img
-              src={docimg ? URL.createObjectURL(docimg) : assets.upload_area}
-              alt="Doctor"
-              className="w-24 h-24 object-cover rounded-full border border-gray-200 hover:opacity-80 transition"
-            />
-          </label>
-          <input
-            type="file"
-            id="doc-img"
-            hidden
-            onChange={(e) => setdocimg(e.target.files[0])}
-          />
-          <p className="text-sm text-gray-600 font-medium">
-            Upload Doctor Image
-          </p>
-        </div>
+    {/* Doctor Image */}
+    <div className="flex flex-col items-center justify-center gap-2 p-4 border border-dashed border-gray-300 rounded-lg hover:border-gray-500 transition">
+      <label htmlFor="doc-img" className="cursor-pointer">
+        <img
+          src={docimg ? URL.createObjectURL(docimg) : assets.upload_area}
+          alt="Doctor"
+          className="w-24 h-24 object-cover rounded-full border border-gray-200 hover:opacity-80 transition"
+        />
+      </label>
+      <input
+        type="file"
+        id="doc-img"
+        hidden
+        onChange={(e) => setdocimg(e.target.files[0])}
+      />
+      <p className="text-sm text-gray-600 font-medium">
+        Upload Doctor Image
+      </p>
+    </div>
 
-        {/* Doctor Name */}
-        <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">
-            Doctor Name
-          </label>
-          <input
-            onChange={(e) => setname(e.target.value)}
-            value={name}
-            type="text"
-            placeholder="Enter doctor name"
-            className="w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
-            required
-          />
-        </div>
+    {/* Doctor Name */}
+    <div className="mt-4">
+      <label className="block text-sm font-medium text-gray-700 mb-1">
+        Doctor Name
+      </label>
+      <input
+        onChange={(e) => setname(e.target.value)}
+        value={name}
+        type="text"
+        placeholder="Enter doctor name"
+        className="w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
+        required
+      />
+    </div>
 
-        {/* Email */}
-        <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">
-            Email
-          </label>
-          <input
-            onChange={(e) => setemail(e.target.value)}
-            value={email}
-            type="email"
-            placeholder="Enter email address"
-            className="w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
-            required
-          />
-        </div>
+    {/* Email */}
+    <div className="mt-4">
+      <label className="block text-sm font-medium text-gray-700 mb-1">
+        Email
+      </label>
+      <input
+        onChange={(e) => setemail(e.target.value)}
+        value={email}
+        type="email"
+        placeholder="Enter email address"
+        className="w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
+        required
+      />
+    </div>
 
-        {/* Speciality */}
+    {/* Password */}
+    <div className="mt-4">
+      <label className="block text-sm font-medium text-gray-700 mb-1">
+        Password
+      </label>
+      <input
+        onChange={(e) => setpassword(e.target.value)}
+        value={password}
+        type="password"
+        placeholder="Enter password"
+        className="w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
+        required
+      />
+    </div>
 
-        <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">
-            Password
-          </label>
-          <input
-            onChange={(e) => setpassword(e.target.value)}
-            value={password}
-            type="password"
-            placeholder="Enter password"
-            className="w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
-            required
-          />
-        </div>
+    {/* Education */}
+    <div className="mt-4">
+      <label className="block text-sm font-medium text-gray-700 mb-1">
+        Education
+      </label>
+      <input
+        onChange={(e) => setdegree(e.target.value)}
+        value={degree}
+        type="text"
+        placeholder="Enter education"
+        className="w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
+        required
+      />
+    </div>
 
-        {/* Education */}
-        <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">
-            Education
-          </label>
-          <input
-            onChange={(e) => setdegree(e.target.value)}
-            value={degree}
-            type="text"
-            placeholder="Enter education"
-            className="w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
-            required
-          />
-        </div>
+    {/* Speciality */}
+    <div className="mt-4">
+      <label className="block text-sm font-medium text-gray-700 mb-1">
+        Speciality
+      </label>
+      <select
+        onChange={(e) => setspeciality(e.target.value)}
+        value={speciality}
+        className="w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
+        required
+      >
+        <option value="General physician">General physician</option>
+        <option value="Gynecologist">Gynecologist</option>
+        <option value="Dermatologist">Dermatologist</option>
+        <option value="Pediatricians">Pediatricians</option>
+        <option value="Neurologist">Neurologist</option>
+      </select>
+    </div>
 
-        {/* Password */}
-        <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">
-            Speciality
-          </label>
-          <select
-            onChange={(e) => setspeciality(e.target.value)}
-            value={speciality}
-            name=""
-            id="s1"
-            className="w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
-            required
-          >
-            <option value="General physician">General physician</option>
-            <option value="Gynecologist">Gynecologist</option>
-            <option value="Dermatologist">Dermatologist</option>
-            <option value="Pediatricians">Pediatricians</option>
-            <option value="Neurologist">Neurologist</option>
-          </select>
-        </div>
+    {/* Experience */}
+    <div className="mt-4">
+      <label className="block text-sm font-medium text-gray-700 mb-1">
+        Experience (Years)
+      </label>
+      <select
+        onChange={(e) => setexprience(e.target.value)}
+        value={expreience}
+        className="w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
+        required
+      >
+        <option value="1 year">1 year</option>
+        <option value="2 year">2 year</option>
+        <option value="3 year">3 year</option>
+        <option value="4 year">4 year</option>
+        <option value="5 year">5 year</option>
+        <option value="6 year">6 year</option>
+        <option value="7 year">7 year</option>
+        <option value="8 year">8 year</option>
+        <option value="9 year">9 year</option>
+        <option value="10 year">10 year</option>
+      </select>
+    </div>
 
-        {/* Experience */}
-        <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">
-            Experience (Years)
-          </label>
-          <select
-            onChange={(e) => setexprience(e.target.value)}
-            value={expreience}
-            name=""
-            id="s2"
-            className="w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
-            required
-          >
-            <option value="1 year">1 year</option>
-            <option value="2 year">2 year</option>
-            <option value="3 year">3 year</option>
-            <option value="4 year">4 year</option>
-            <option value="5 year">5 year</option>
-            <option value="6 year">6 year</option>
-            <option value="7 year">7 year</option>
-            <option value="8 year">8 year</option>
-            <option value="9 year">9 year</option>
-            <option value="10 year">10 year</option>
-          </select>
-        </div>
+    {/* Address Line 1 */}
+    <div className="mt-4">
+      <label className="block text-sm font-medium text-gray-700 mb-1">
+        Address Line 1
+      </label>
+      <input
+        onChange={(e) => setadrees1(e.target.value)}
+        value={adrees1}
+        type="text"
+        placeholder="Enter address line 1"
+        className="w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
+        required
+      />
+    </div>
 
-        {/* Address Line 1 */}
-        <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">
-            Address Line 1
-          </label>
-          <input
-            onChange={(e) => setadrees1(e.target.value)}
-            value={adrees1}
-            type="text"
-            placeholder="Enter address line 1"
-            className="w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
-            required
-          />
+    {/* Address Line 2 */}
+    <div className="mt-4">
+      <input
+        onChange={(e) => setadrees2(e.target.value)}
+        value={adrees2}
+        type="text"
+        placeholder="Enter address line 2"
+        className="w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
+        required
+      />
+    </div>
 
-          <input
-            onChange={(e) => setadrees2(e.target.value)}
-            value={adrees2}
-            type="text"
-            placeholder="Enter address line 2"
-            className="w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
-            required
-          />
-        </div>
+    {/* Fees */}
+    <div className="mt-4">
+      <label className="block text-sm font-medium text-gray-700 mb-1">
+        Fees
+      </label>
+      <input
+        onChange={(e) => setfees(e.target.value)}
+        value={fess}
+        type="number"
+        placeholder="Enter consultation fees"
+        className="w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
+        required
+      />
+    </div>
 
-        {/* Address Line 2 */}
+    {/* About */}
+    <div className="mt-4">
+      <label className="block text-sm font-medium text-gray-700 mb-1">
+        About
+      </label>
+      <textarea
+        onChange={(e) => setabout(e.target.value)}
+        value={about}
+        placeholder="Write a brief about the doctor"
+        className="w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
+        rows="4"
+        required
+      ></textarea>
+    </div>
 
-        {/* Fees */}
-        <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">
-            Fees
-          </label>
-          <input
-            onChange={(e) => setfees(e.target.value)}
-            value={fess}
-            type="number"
-            placeholder="Enter consultation fees"
-            className="w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
-            required
-          />
-        </div>
+    {/* Submit Button */}
+    <div className="text-center mt-6">
+      <button
+        type="submit"
+        className="w-full bg-indigo-500 text-white font-semibold py-2 rounded-lg hover:bg-indigo-600 transition duration-200"
+      >
+        Add Doctor
+      </button>
+    </div>
+  </div>
+</form>
 
-        {/* About */}
-        <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">
-            About
-          </label>
-          <textarea
-            onChange={(e) => setabout(e.target.value)}
-            value={about}
-            placeholder="Write a brief about the doctor"
-            className="w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
-            rows="4"
-            required
-          ></textarea>
-        </div>
-
-        {/* Submit Button */}
-        <div className="text-center">
-          <button
-            type="submit"
-            className="w-full bg-indigo-500 text-white font-semibold py-2 rounded-lg hover:bg-indigo-600 transition duration-200"
-          >
-            Add Doctor
-          </button>
-        </div>
-      </div>
-    </form>
   );
 };
 

@@ -20,21 +20,27 @@ const Navbar = () => {
       dtoken && localStorage.removeItem("dtoken");
     }
   };
+
   return (
-    <div className="flex items-center justify-between bg-slate-50 p-4 px-5 ">
+    <div className="flex items-center justify-between bg-slate-50 p-4 md:px-8">
+      {/* Logo and Role */}
       <div className="flex items-center space-x-4">
-        <img
-          src={assets.admin_logo}
-          alt=""
-          className="w-15 h-auto rounded-full"
-        />
-        <p className="text-black text-lg font-semibold border-2 border-gray-800 rounded-full px-4">
+      <img
+  src={assets.admin_logo}
+  alt="Admin Logo"
+  className="w-1/2 sm:w-12 md:w-14 lg:w-24 xl:w-32 h-auto sm:h-5 md:h-5 lg:h-auto rounded-full"
+/>
+
+
+        <p className="text-black text-base sm:text-lg md:text-xl font-semibold border-2 border-gray-800 rounded-full px-3 sm:px-4">
           {atoken ? "Admin" : "Doctor"}
         </p>
       </div>
+
+      {/* Logout Button */}
       <button
         onClick={logout}
-        className="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg transition duration-300"
+        className="bg-red-500 hover:bg-red-600 text-white text-sm sm:text-base md:text-lg px-3 sm:px-4 py-2 rounded-lg transition duration-300"
       >
         Logout
       </button>

@@ -2,13 +2,14 @@ import React, { useContext, useEffect } from "react";
 import { AdminContext } from "../../context/Admincontext";
 
 const Doctorslist = () => {
-  const { atoken, getAlldocotrs, doctors,chngeavailability } = useContext(AdminContext);
+  const { atoken, getAlldocotrs, doctors, chngeavailability } = useContext(AdminContext);
 
   useEffect(() => {
     if (atoken) {
       getAlldocotrs();
     }
   }, [atoken]);
+
   return (
     <div className="max-w-screen-lg mx-auto p-6 space-y-6">
       {/* Header Section */}
@@ -17,7 +18,7 @@ const Doctorslist = () => {
       </div>
 
       {/* Doctors List */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
         {doctors.map((item, index) => (
           <div
             key={index}
@@ -38,7 +39,8 @@ const Doctorslist = () => {
 
               {/* Availability Section */}
               <div className="flex items-center gap-2">
-                <input onChange={()=>chngeavailability(item._id)}
+                <input
+                  onChange={() => chngeavailability(item._id)}
                   type="checkbox"
                   checked={item.available}
                   className="form-checkbox h-5 w-5 text-green-500"

@@ -8,7 +8,7 @@ const Sidebar = () => {
   const { atoken } = useContext(AdminContext);
   const {dtoken} = useContext(DoctorContext)
   return (
-    <div className={`h-screen w-64 bg-black text-white p-4`}>
+    <div className={`md:h-screen h-45 w-screen bg-black text-white p-4`}>
       {atoken && (
         <ul className="space-y-4">
           {/* Dashboard Link */}

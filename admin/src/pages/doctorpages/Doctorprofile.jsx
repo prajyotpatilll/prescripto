@@ -144,16 +144,28 @@ const Doctorprofile = () => {
           <div className="mt-6">
          
           <h2 className="text-lg font-semibold text-gray-800">Avalability</h2>
-            <input
-              id="available-checkbox"
-              type="checkbox"
-              checked={docdata.available}
-              onChange={(e) =>
-                setdocdata((prev) => ({ ...prev, available: e.target.checked }))
-              }
-              className="form-checkbox h-5 w-5 text-green-500"
-              aria-label="Available"
-            />
+          {
+  isedit ? (
+    <input
+      id="available-checkbox"
+      type="checkbox"
+      checked={docdata.available}
+      onChange={(e) =>
+        setdocdata((prev) => ({ ...prev, available: e.target.checked }))
+      }
+      className="form-checkbox h-5 w-5 text-green-500"
+      aria-label="Available"
+    />
+  ) : (
+    <input
+      type="checkbox"
+      checked={docdata.available}
+      readOnly // This makes it clear that the checkbox is read-only
+    />
+  )
+}
+
+            
             
           </div>
         </div>

@@ -1,11 +1,11 @@
 import React, { useContext } from "react";
 import Login from "./pages/Login";
-import { ToastContainer, toast } from "react-toastify";
+import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { AdminContext } from "./context/Admincontext";
 import Navbar from "./componants/Navbar";
 import Sidebar from "./componants/Sidebar";
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, Navigate } from "react-router-dom";
 import Dashboard from "./pages/adminpages/Dashboard";
 import Allapointment from "./pages/adminpages/Allapointment";
 import Adddoctor from "./pages/adminpages/Adddoctor";
@@ -21,51 +21,55 @@ const App = () => {
 
   return atoken || dtoken ? (
     <div className="flex flex-col min-h-screen bg-gray-50">
+      {/* Toast Notifications */}
       <ToastContainer />
 
+      {/* Navbar */}
       <header className="bg-white shadow-md">
         <Navbar />
       </header>
 
-      <div className="flex flex-grow">
-        <aside className="w-64 bg-gray-800 text-white hidden md:block">
+      {/* Main Layout */}
+      <div className="flex-row md:flex flex-grow">
+        {/* Sidebar */}
+        <aside className="w-64 bg-gray-800 text-white md:block">
           <Sidebar />
         </aside>
 
+        {/* Main Content */}
         <main className="flex-grow p-6 bg-gray-100">
-          {
-            atoken?<Routes>
-            {/* admin routes */}
-            
-            <Route path="/" element={<Dashboard />} />
-            <Route path="/all-Appintment" element={<Allapointment />} />
-            <Route path="/add-doctor" element={<Adddoctor />} />
-            <Route path="/doctor-list" element={<Doctorslist />} />
-
-   
-          </Routes>:
           <Routes>
-          {/* admin routes */}
-          
-         
-          {/* doctors routes */}
-          <Route path="/" element={<Doctordash />} />
-          <Route path="/doc-appointment" element={<Docotrappointments />} />
-          <Route path="/doc-profile" element={<Doctorprofile />} />
-        </Routes>
-          }
-          
+            {atoken && (
+              <>
+                {/* Admin Routes */}
+                <Route path="/" element={<Dashboard />} />
+                <Route path="/all-Appintment" element={<Allapointment />} />
+                <Route path="/add-doctor" element={<Adddoctor />} />
+                <Route path="/doctor-list" element={<Doctorslist />} />
+              </>
+            )}
+
+            {dtoken && (
+              <>
+                {/* Doctor Routes */}
+                <Route path="/" element={<Doctordash />} />
+                <Route path="/doc-appointment" element={<Docotrappointments />} />
+                <Route path="/doc-profile" element={<Doctorprofile />} />
+              </>
+            )}
+
+            {/* Fallback for Unmatched Routes */}
+            <Route path="*" element={<Navigate to="/" replace />} />
+          </Routes>
         </main>
       </div>
     </div>
   ) : (
-    <>
-      <div className="flex items-center justify-center min-h-screen bg-gray-50">
-        <Login />
-
-        <ToastContainer />
-      </div>
-    </>
+    /* Login Page */
+    <div className="flex items-center justify-center min-h-screen bg-gray-50">
+      <Login />
+      <ToastContainer />
+    </div>
   );
 };
 
