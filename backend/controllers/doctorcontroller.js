@@ -168,5 +168,25 @@ const getprofile = async (req, res) => {
  
  }
 
+ const updateprofile = async (req, res) => {
+    try {
+ 
+       const { docid, name,  about, fees, available, address, speciality } = req.body
 
-export {changeavailability,docotrlist,doctorlogin,doctorappointments,cancelappointment,completed, docdash, getprofile}
+       if (address) {
+          await doctorModel.findByIdAndUpdate(docid, { name,speciality, available, about, fees, address: JSON.parse(address) })
+       }
+       else {
+          await doctorModel.findByIdAndUpdate(docid, { name, speciality,  about, fees })
+       }
+ 
+       res.json({ success: true, message: "profile updated" })
+ 
+    } catch (error) {
+       console.log(error)
+       res.json({ success: false, message: error.message })
+    }
+ }
+
+
+export {changeavailability,docotrlist,doctorlogin,doctorappointments,cancelappointment,completed, docdash, getprofile, updateprofile}

@@ -33,18 +33,28 @@ const App = () => {
         </aside>
 
         <main className="flex-grow p-6 bg-gray-100">
-          <Routes>
+          {
+            atoken?<Routes>
             {/* admin routes */}
-            <Route path="/" element={<></>} />
-            <Route path="/admin-dashboard" element={<Dashboard />} />
+            
+            <Route path="/" element={<Dashboard />} />
             <Route path="/all-Appintment" element={<Allapointment />} />
             <Route path="/add-doctor" element={<Adddoctor />} />
             <Route path="/doctor-list" element={<Doctorslist />} />
-            {/* doctors routes */}
-            <Route path="/doc-dashbord" element={<Doctordash />} />
-            <Route path="/doc-appointment" element={<Docotrappointments />} />
-            <Route path="/doc-profile" element={<Doctorprofile />} />
-          </Routes>
+
+   
+          </Routes>:
+          <Routes>
+          {/* admin routes */}
+          
+         
+          {/* doctors routes */}
+          <Route path="/" element={<Doctordash />} />
+          <Route path="/doc-appointment" element={<Docotrappointments />} />
+          <Route path="/doc-profile" element={<Doctorprofile />} />
+        </Routes>
+          }
+          
         </main>
       </div>
     </div>

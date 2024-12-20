@@ -13,7 +13,7 @@ const Sidebar = () => {
         <ul className="space-y-4">
           {/* Dashboard Link */}
           <NavLink
-            to="/admin-dashboard"
+            to="/"
             className={({ isActive }) =>
               `flex items-center p-2 rounded-lg hover:bg-gray-700 transition ${
                 isActive ? "bg-gray-700" : ""
@@ -84,7 +84,7 @@ const Sidebar = () => {
         <ul className="space-y-4">
           {/* Dashboard Link */}
           <NavLink
-            to="/doc-dashbord"
+            to="/"
             className={({ isActive }) =>
               `flex items-center p-2 rounded-lg hover:bg-gray-700 transition ${
                 isActive ? "bg-gray-700" : ""
