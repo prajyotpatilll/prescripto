@@ -177,8 +177,10 @@ const getprofile = async (req, res) => {
           await doctorModel.findByIdAndUpdate(docid, { name,speciality, available, about, fees, address: JSON.parse(address) })
        }
        else {
-          await doctorModel.findByIdAndUpdate(docid, { name, speciality,  about, fees })
+          await doctorModel.findByIdAndUpdate(docid, { name, available, speciality,  about, fees })
        }
+
+       
  
        res.json({ success: true, message: "profile updated" })
  
