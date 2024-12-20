@@ -16,6 +16,7 @@ const Doctorprofile = () => {
         about: docdata.about,
         fees: docdata.fees,
         address: JSON.stringify(docdata.address),
+        available: docdata.available,
       };
 
       const { data } = await axios.post(
@@ -137,10 +138,23 @@ const Doctorprofile = () => {
                 className="border border-gray-300 rounded px-3 py-2"
               />
             ) : (
-              <p className="text-gray-600">
-                Consultation Fee: ${docdata.fees}
-              </p>
+              <p className="text-gray-600">Consultation Fee: ${docdata.fees}</p>
             )}
+          </div>
+          <div className="mt-6">
+         
+          <h2 className="text-lg font-semibold text-gray-800">Avalability</h2>
+            <input
+              id="available-checkbox"
+              type="checkbox"
+              checked={docdata.available}
+              onChange={(e) =>
+                setdocdata((prev) => ({ ...prev, available: e.target.checked }))
+              }
+              className="form-checkbox h-5 w-5 text-green-500"
+              aria-label="Available"
+            />
+            
           </div>
         </div>
         <div className="mt-6 text-center">

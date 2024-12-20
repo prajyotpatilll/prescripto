@@ -1,5 +1,5 @@
 import express from 'express'
-import { cancelappointment, changeavailability, completed, docdash, docotrlist, doctorappointments, doctorlogin, getprofile, updateprofile } from '../controllers/doctorcontroller.js'
+import { cancelappointment, completed, docdash, docotrlist, doctorappointments, doctorlogin, getprofile, updateprofile } from '../controllers/doctorcontroller.js'
 import authdoc from '../middlewares/authdocotor.js'
 const doctorrouter = express.Router()
 import upload from '../middlewares/multer.js'

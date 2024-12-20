@@ -12,7 +12,6 @@ const DoctorContextProvide = (props) => {
   );
 
   const [docdata, setdocdata] = useState(false);
-
   const [appointments, setappointments] = useState([]);
   const [dashdata, setdashdata] = useState(false);
 
@@ -65,9 +64,6 @@ const DoctorContextProvide = (props) => {
     }
   };
 
-  
-
-
   const value = {
     dtoken,
     setdtoken,
@@ -78,8 +74,7 @@ const DoctorContextProvide = (props) => {
     dashdata,
     docdata,
     getprofiledata,
-    setdocdata,
-    
+    setdocdata
   };
 
   return (
