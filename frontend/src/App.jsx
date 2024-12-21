@@ -1,10 +1,10 @@
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
-import Home from './pages/home';
+import Home from './pages/Home';
 import About from './pages/About';
 import Appoinment from './pages/Appoinment';
 import Contact from './pages/Contact';
-import Doctors from './pages/doctors';
+import Doctors from './pages/Doctors';
 import Login from './pages/Login';
 import Myappointment from './pages/Myappointment';
 import Myprofile from './pages/Myprofile';
