@@ -25,7 +25,7 @@ const Login = () => {
         if (data.success) {
           localStorage.setItem("atoken", data.token);
           setatoken(data.token);
-          console.log(data.token);
+          
         } else {
           toast.error(data.message);
         }
@@ -35,7 +35,7 @@ const Login = () => {
         if(data.success){
           localStorage.setItem("dtoken", data.dtoken);
           setdtoken(data.dtoken);
-          console.log(data, dtoken);
+          
         }else{
           toast.error(data.message);
         }

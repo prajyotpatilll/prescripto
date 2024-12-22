@@ -54,7 +54,7 @@ const AdminContextProvide = (props) =>{
             const {data} = await axios.get(BackendUrl + '/api/admin/appointment-data',{headers:{atoken}})
             if(data.success){
                 setappointsment(data.appointments)
-                console.log(data.appointments)
+                
             }else{
                 toast.error(data.message)
             }
@@ -70,7 +70,7 @@ const AdminContextProvide = (props) =>{
             const {data} = await axios.get(BackendUrl+'/api/admin/admindash',{headers:{atoken}})
             if(data.success){
                 setdashdata(data.dashdata)
-                console.log(data.dashdata)
+                
             }else{
                 toast.error(data.message)
             }

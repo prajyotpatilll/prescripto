@@ -23,7 +23,7 @@ const DoctorContextProvide = (props) => {
       );
       if (data.success) {
         setappointments(data.appointments);
-        console.log(data.appointments);
+        
       } else {
         toast.error(data.message);
       }
@@ -39,7 +39,7 @@ const DoctorContextProvide = (props) => {
       });
       if (data.success) {
         setdashdata(data.dashdata);
-        console.log(data.dashdata);
+        
       } else {
         toast.error(data.message);
       }
@@ -55,7 +55,7 @@ const DoctorContextProvide = (props) => {
       });
       if (data.success) {
         setdocdata(data.docdata);
-        console.log(data.docdata);
+        
       } else {
         toast.error(data.message);
       }

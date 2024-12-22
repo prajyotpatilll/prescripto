@@ -65,13 +65,11 @@ const Navbar = () => {
           </div>
         ) : (
           <button
-          onClick={() => navigate("./Login")}
-          className="w-full sm:w-auto px-3 sm:px-6 py-2 sm:py-2 bg-blue-500 text-white rounded-full font-light text-xs sm:text-base transition-all duration-200 hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50"
-        >
-          Create Account
-        </button>
-        
-
+            onClick={() => navigate("./Login")}
+            className="w-full sm:w-auto px-3 sm:px-6 py-2 sm:py-2 bg-blue-500 text-white rounded-full font-light text-xs sm:text-base transition-all duration-200 hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50"
+          >
+            Create Account
+          </button>
         )}
         <img
           onClick={() => setshowmenu(true)}
@@ -153,6 +151,21 @@ const Navbar = () => {
                 }
               >
                 CONTACT
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
+                onClick={() => setshowmenu(false)}
+                to="https://prescripto-proz1.vercel.app/"
+                target="_blank" // Open in a new tab
+                rel="noopener noreferrer" // Security for external links
+                className={({ isActive }) =>
+                  `text-gray-700 hover:text-gray-900 transition-colors ${
+                    isActive ? "font-bold text-black" : ""
+                  }`
+                }
+              >
+                Admin
               </NavLink>
             </li>
           </ul>

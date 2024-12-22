@@ -44,7 +44,7 @@ const Adddoctor = () => {
       );
 
       formdata.forEach((value, key) => {
-        console.log(`${key}:${value}`);
+        
       });
 
       const { data } = await axios.post(

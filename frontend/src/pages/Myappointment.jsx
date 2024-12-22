@@ -38,7 +38,7 @@ const Myappointment = () => {
       });
       if (data.success) {
         setappointsment(data.appointments.reverse());
-        console.log(data.appointments);
+       
       }
     } catch (error) {
       toast.error(error.message);
