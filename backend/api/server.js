@@ -15,12 +15,11 @@ connectCloudinary()
 app.use(express.json())
 app.use(cors())
 
-// api endpoints 
+
 
 app.use('/api/admin',adminrouter)
 app.use('/api/doctor',doctorrouter)
 app.use('/api/user',useRouter)
-
 
 app.get('/' ,(req,res)=>{
     res.send('Api is working')
