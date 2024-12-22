@@ -30,7 +30,7 @@ const Footer = () => {
       <div className="space-y-2">
         <h2 className="font-semibold text-lg text-black">GET IN TOUCH</h2>
         <p className="text-gray text-light hover:text-gray-600 cursor-pointer">+91 01280183983</p>
-        <p className="text-gray text-light hover:text-gray-600 cursor-pointer">think@gmail.com</p>
+        <p className="text-gray text-light hover:text-gray-600 cursor-pointer">thinksoftonic@gmail.com</p>
       </div>
       
     </div>
@@ -40,7 +40,7 @@ const Footer = () => {
   <div className="mt-10 text-center text-black text-xs">
     <hr />
     <br />
-    © 2024 GreatStack - All Rights Reserved.
+    © prajyotpatil!!! - All Rights Reserved.
   </div>
 </div>
 

@@ -126,26 +126,26 @@ const Appointment = () => {
   useEffect(() => {}, [docslot]);
 
   return (
-    <div>
+    <div className="p-4">
       <div>
         {docinfo ? (
-          <div className="justify-center items-center flex flex-col md:flex-row gap-5">
-            <div className="w-1/3">
+          <div className="flex flex-col md:flex-row gap-5 items-center justify-center">
+            <div className="w-full md:w-1/3">
               <img
-                className="bg-blue-200 rounded-xl"
+                className="bg-blue-200 rounded-xl w-full"
                 src={docinfo.image}
                 alt="Doctor"
               />
             </div>
-            <div className="border border-gray-300 p-4 rounded-lg w-2/3 gap-14 ">
+            <div className="border border-gray-300 p-4 rounded-lg w-full md:w-2/3 gap-14">
               <h1 className="flex gap-3 font-semibold text-xl">
                 {docinfo.name}{" "}
                 <img className="w-4" src={assets.verified_icon} alt="" />
               </h1>
               <div className="flex py-2 sm:flex-row flex-col">
                 <p>{docinfo.degree}</p>
-                <p className="pr-2"> - {docinfo.speciality} </p>
-                <p className="px-2 border border-gray-300 rounded-full">
+                <p className="pr-2"> {docinfo.speciality} </p>
+                <p className="px-2 border border-gray-300 rounded-full ">
                   {docinfo.exprience}
                 </p>
               </div>
@@ -161,33 +161,35 @@ const Appointment = () => {
           <p>Loading doctor information...</p>
         )}
       </div>
-      <div className="flex flex-col gap-5 items-center my-10 ">
+      <div className="flex flex-col gap-5 items-center my-10">
         <p className="font-semibold">Booking Slots</p>
 
-        <div className="font-medium flex gap-10">
+        <div className="font-medium flex flex-wrap gap-5 justify-center">
           {docslot.length > 0 &&
             docslot.map((item, index) => (
               <div
                 onClick={() => setslotindex(index)}
                 key={index}
-                className={`flex flex-col items-center justify-center cursor-pointer text-gray-950 rounded-2xl p-4 border-2 hover:bg-primary ${
+                className={`flex flex-col items-center sm:justify-center justify-start cursor-pointer text-gray-950 rounded-2xl p-4 border-2 hover:bg-primary ${
                   slotindex === index
                     ? "bg-primary text-white"
                     : "border-gray-100"
-                }`}
+                } w-20 sm:w-24 md:w-28`} // Responsive width
               >
                 <p>{item[0] && daysofweek[item[0].datetime.getDay()]}</p>
                 <p>{item[0] && item[0].datetime.getDate()}</p>
+                
               </div>
             ))}
+            
         </div>
       </div>
-      <div className="flex items-center w-full overflow-x-scroll mt-5 gap-5">
+      <div className="flex items-center w-full overflow-x-auto mt-5 gap-3 px-4 py-2">
         {docslot.length > 0 &&
           docslot[slotindex].map((item, index) => (
             <p
               onClick={() => setslottime(item.time)}
-              className={`hover:bg-primary text-sm font-light flex-shrink-0 px-5 py-2 rounded-full cursor-pointer border ${
+              className={`hover:bg-primary text-sm font-light px-5 py-2 rounded-full cursor-pointer border ${
                 item.time === slottime
                   ? "bg-primary text-white"
                   : "border-gray-100"
@@ -196,20 +198,22 @@ const Appointment = () => {
             >
               {item.time.toLowerCase()}
             </p>
+            
           ))}
+          
       </div>
+     
       <div className="flex items-center justify-center p-5">
+        
         <button
           onClick={bookappintment}
-          className="flex items-center gap-2 bg-primary px-8 py-3 rounded-full  text-white text-sm  m-auto md:m-0 hover:scale-105 transition-all duration-300"
+          className="flex items-center gap-2 bg-primary px-8 py-3 rounded-full text-white text-sm m-auto md:m-0 hover:scale-105 transition-all duration-300"
         >
           Book an appointment
         </button>
       </div>
 
       <Topdoctors />
-
-      {/* <Relateddoc docid={docid} speciality={speciality} /> */}
     </div>
   );
 };
