@@ -122,7 +122,7 @@ const admindashboard = async (req, res) => {
             doctors: doctors.length,
             patient: users.length,
             appointments: appointment.length,
-            latestappointment: appointment.reverse().slice(0,5)
+            latestappointment: appointment.reverse().slice(0, 5)
         }
 
         res.json({ success: true, dashdata })

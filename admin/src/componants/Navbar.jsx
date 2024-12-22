@@ -25,12 +25,11 @@ const Navbar = () => {
     <div className="flex items-center justify-between bg-slate-50 p-4 md:px-8">
       {/* Logo and Role */}
       <div className="flex items-center space-x-4">
-      <img
-  src={assets.admin_logo}
-  alt="Admin Logo"
-  className="w-1/2 sm:w-12 md:w-14 lg:w-24 xl:w-32 h-auto sm:h-5 md:h-5 lg:h-auto rounded-full"
-/>
-
+        <img
+          src={assets.admin_logo}
+          alt="Admin Logo"
+          className="w-1/2 sm:w-12 md:w-14 lg:w-24 xl:w-32 h-auto sm:h-5 md:h-5 lg:h-auto rounded-full"
+        />
 
         <p className="text-black text-base sm:text-lg md:text-xl font-semibold border-2 border-gray-800 rounded-full px-3 sm:px-4">
           {atoken ? "Admin" : "Doctor"}
