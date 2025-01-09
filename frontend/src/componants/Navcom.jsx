@@ -10,7 +10,7 @@ const Navcom = ({ style }) => {
           <hr className="border-none outline-none h-0.5 bg-primary w-3/5 m-auto hidden" />
         </NavLink>
         <NavLink onClick={() => window.scrollTo(0, 0)} to="/doctors">
-          <li className="py-1">All Doctors</li>
+          <li className="py-1">Doctors</li>
           <hr className="border-none outline-none h-0.5 bg-primary w-3/5 m-auto hidden" />
         </NavLink>
         <NavLink onClick={() => window.scrollTo(0, 0)} to="/about">
