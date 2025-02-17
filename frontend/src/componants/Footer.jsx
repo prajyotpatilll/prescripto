@@ -13,7 +13,7 @@ const Footer = () => {
     <div className="flex flex-col items-center lg:items-start text-center lg:text-left space-y-4 lg:w-1/3">
       <Logo/>
       <p className="text-sm text-black-400 leading-relaxed">
-        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
+      Welcome to Prescripto, your trusted partner in managing your healthcare needs conveniently and efficiently. At Prescripto, we understand the challenges individuals face when it comes to scheduling doctor appointments and managing their health records.
       </p>
     </div>
     

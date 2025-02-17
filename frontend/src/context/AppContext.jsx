@@ -7,7 +7,7 @@ import { useEffect } from "react";
 export const AppContext = createContext();
 
 const AppContextProvide = (props) => {
-  const currencysem = "$";
+  const currencysem = "₹";
   const backendURL = import.meta.env.VITE_BACKEND_URL;
 
   const [doctors, setdoctors] = useState([]);

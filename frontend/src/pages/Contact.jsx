@@ -15,9 +15,9 @@ const Contact = () => {
         </div>
         <div className="flex flex-col items-start gap-5">
           <b>Our Office</b>
-          <p>54709 Willms Station Suite 350, Washington, USA</p>
-          <p>Tel: (415) 555‑0132</p>
-          <p>Email: greatstackdev@gmail.com</p>
+          <p>416230 At Post Kaneri, Kolhapur</p>
+          <p>Tel: 1234567890</p>
+          <p>Email: thinksoftonic@gmail.com</p>
           <b>Careers at PRESCRIPTO</b>
           <p>Learn more about our teams and job openings.</p>
           <button className="px-6 py-2 bg-blue-500 text-white rounded-md font-semibold hover:bg-blue-600 active:bg-blue-700 transition-all duration-300">

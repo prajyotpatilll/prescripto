@@ -1,8 +1,26 @@
 import React, { useContext, useEffect } from "react";
 import { AdminContext } from "../../context/Admincontext";
+import axios from "axios";
+import { toast } from "react-toastify";
 
 const Doctorslist = () => {
-  const { atoken, getAlldocotrs, doctors, chngeavailability } = useContext(AdminContext);
+  const { atoken, getAlldocotrs, doctors, chngeavailability,BackendUrl } =
+    useContext(AdminContext);
+
+    const deletedoc = async (id)=>{
+      try {
+          const response = await axios.post(BackendUrl + '/api/admin/deletedoc',{docid : id},{headers:{atoken}})
+          if (response.data.success) {
+            toast.success(response.data.message);
+            getAlldocotrs()
+        } else {
+            toast.error(response.data.message);
+        }
+          
+      } catch (error) {
+          toast.error(error.message)
+      }
+  }
 
   useEffect(() => {
     if (atoken) {
@@ -46,6 +64,9 @@ const Doctorslist = () => {
                   className="form-checkbox h-5 w-5 text-green-500"
                 />
                 <p className="text-sm text-gray-800">Available</p>
+                <button onClick={()=>deletedoc(item._id)} className="bg-red-600 text-white px-4 rounded-lg hover:bg-red-700 transition duration-300 active:scale-95 sm:px-6 ">
+                  Del
+                </button>
               </div>
             </div>
           </div>
