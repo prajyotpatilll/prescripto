@@ -121,9 +121,9 @@ const Myappointment = () => {
               </div>
             ) : (
               <div className="flex flex-col md:flex-row gap-2">
-                <button className="px-4 py-2 bg-blue-600 text-white text-sm font-medium rounded hover:bg-blue-700">
+                {/* <button className="px-4 py-2 bg-blue-600 text-white text-sm font-medium rounded hover:bg-blue-700">
                   Pay Online
-                </button>
+                </button> */}
                 <button
                   onClick={() => cancelappointment(item._id)}
                   className="px-4 py-2 bg-red-500 text-white text-sm font-medium rounded hover:bg-red-600"

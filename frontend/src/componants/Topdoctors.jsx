@@ -21,7 +21,7 @@ const Topdoctors = () => {
             }}
             className="border border-blue-200 rounded-xl overflow-hidden cursor-pointer transform transition duration-300 hover:scale-105"
           >
-            <img className="bg-blue-50" src={item.image} alt="" />
+            <img className="bg-blue-50 w-full h-50 object-cover" src={item.image} alt="" />
             <div className="p-4">
               <div className="flex items-center gap-2 text-sm text-center text-green-500">
                 {item.available ? (
