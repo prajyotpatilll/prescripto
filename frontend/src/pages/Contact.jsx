@@ -20,9 +20,9 @@ const Contact = () => {
           <p>Email: thinksoftonic@gmail.com</p>
           <b>Careers at PRESCRIPTO</b>
           <p>Learn more about our teams and job openings.</p>
-          <button className="px-6 py-2 bg-blue-500 text-white rounded-md font-semibold hover:bg-blue-600 active:bg-blue-700 transition-all duration-300">
+          {/* <button className="px-6 py-2 bg-blue-500 text-white rounded-md font-semibold hover:bg-blue-600 active:bg-blue-700 transition-all duration-300">
             Explore Job
-          </button>
+          </button> */}
         </div>
       </div>
     </div>

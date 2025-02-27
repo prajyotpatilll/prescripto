@@ -144,17 +144,27 @@ const Appointment = () => {
               </h1>
               <div className="flex py-2 sm:flex-row flex-col">
                 <p>{docinfo.degree}</p>
-                <p className="pr-2"> {docinfo.speciality} </p>
+                <p className="px-2"> {docinfo.speciality} </p>
                 <p className="px-2 border border-gray-300 rounded-full ">
                   {docinfo.exprience}
                 </p>
               </div>
-
               <p className="font-bold text-m py-1">About</p>
               <p>{docinfo.about}</p>
-              <p>
-                Appointment fees: {currencysem} {docinfo.fees}
-              </p>
+              <div className="mt-2">
+                <p className="font-bold text-m">
+                  Appointment fees: 
+                </p>
+                <p>{currencysem} {docinfo.fees}</p>
+              </div>
+
+              {docinfo.address && (
+                <div className="mt-2">
+                  <p className="font-bold text-m">Address:</p>
+                  <p>{docinfo.address.line1}</p>
+                  <p>{docinfo.address.line2}</p>
+                </div>
+              )}
             </div>
           </div>
         ) : (
@@ -178,10 +188,8 @@ const Appointment = () => {
               >
                 <p>{item[0] && daysofweek[item[0].datetime.getDay()]}</p>
                 <p>{item[0] && item[0].datetime.getDate()}</p>
-                
               </div>
             ))}
-            
         </div>
       </div>
       <div className="flex items-center w-full overflow-x-auto mt-5 gap-3 px-4 py-2">
@@ -198,13 +206,10 @@ const Appointment = () => {
             >
               {item.time.toLowerCase()}
             </p>
-            
           ))}
-          
       </div>
-     
+
       <div className="flex items-center justify-center p-5">
-        
         <button
           onClick={bookappintment}
           className="flex items-center gap-2 bg-primary px-8 py-3 rounded-full text-white text-sm m-auto md:m-0 hover:scale-105 transition-all duration-300"
